@@ -1,4 +1,4 @@
-threads_count = ENV.fetch("RAILS_MAX_THREADS") { 3 }
+threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
 threads threads_count, threads_count
 
 rails_env = ENV.fetch("RAILS_ENV", "development")
@@ -14,5 +14,5 @@ when "development"
   worker_timeout 3600 # Don't let worker die during debugger session
 end
 
-port ENV.fetch("PORT") { 3000 }
+port ENV.fetch("PORT", 3000)
 plugin :tmp_restart
