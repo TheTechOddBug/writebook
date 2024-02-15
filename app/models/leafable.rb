@@ -4,6 +4,6 @@ module Leafable
   TYPES = %w[ Page Section ]
 
   included do
-    has_one :leaf, as: :leafable, inverse_of: :leavable, touch: true
+    has_one :leaf, as: :leafable, inverse_of: :leafable, touch: true
   end
 end
