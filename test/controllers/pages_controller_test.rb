@@ -13,4 +13,16 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "With interesting words.", new_page.body
     assert_equal books(:handbook), new_page.leaf.book
   end
+
+  test "update" do
+    get edit_leafable_path(leafs(:welcome_page))
+    assert_response :ok
+
+    put leafable_path(leafs(:welcome_page)), params: { page: { title: "Better welcome", body: "With even more interesting words." } }
+    assert_redirected_to books(:handbook)
+
+    updated_page = leafs(:welcome_page).reload.page
+    assert_equal "Better welcome", updated_page.title
+    assert_equal "With even more interesting words.", updated_page.body
+  end
 end
