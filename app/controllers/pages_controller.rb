@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  include SetBook, SetLeafable
+  include SetBookLeaf
 
   def index
   end
