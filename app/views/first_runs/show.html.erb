@@ -1,0 +1,43 @@
+<% @page_title = "Set up Workbook" %>
+
+<%= form_with model: @user, url: first_run_path do |form| %>
+      <h1><%= @page_title %></h1>
+
+      <fieldset>
+        <label data-controller="upload-preview">
+          <div>
+            <%= form.file_field :avatar, class: "input", accept: "image/*" %>
+            <span class="for-screen-reader">Add your avatar</span>
+          </div>
+
+          <div>
+            <span class="for-screen-reader">Avatar</span>
+          </div>
+        </label>
+      </fieldset>
+
+      <div>
+        <label>
+          <%= form.text_field :name, class: "input", autocomplete: "name", placeholder: "Name", autofocus: true, required: true,
+                data: { "1p-ignore": true } %>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <%= form.email_field :email_address, class: "input", autocomplete: "username", placeholder: "Email address", required: true %>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <%= form.password_field :password, class: "input", autocomplete: "new-password", placeholder: "Password", required: true, maxlength: 72 %>
+        </label>
+      </div>
+
+      <%= form.button class: "btn btn--reversed center txt-large", type: "submit" do %>
+        <span>Create</span>
+      <% end %>
+    </div>
+  </section>
+<% end %>

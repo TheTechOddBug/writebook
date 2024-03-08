@@ -1,6 +1,10 @@
 require "test_helper"
 
 class PagesControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    sign_in :kevin
+  end
+
   test "create" do
     get new_book_page_path(books(:handbook))
     assert_response :ok

@@ -1,6 +1,22 @@
 Rails.application.routes.draw do
   root "books#index"
 
+  resource :first_run, only: %i[ show create ]
+  resource :session, only: %i[ new create destroy ]
+
+  get "join/:join_code", to: "users#new", as: :join
+  post "join/:join_code", to: "users#create"
+
+  resources :users, only: :show do
+    scope module: "users" do
+      resource :avatar, only: %i[ show destroy ]
+    end
+  end
+
+  direct :fresh_user_avatar do |user, options|
+    route_for :user_avatar, user.avatar_token, v: user.updated_at.to_fs(:number)
+  end
+
   resources :books do
     resources :leaves
     resources :sections

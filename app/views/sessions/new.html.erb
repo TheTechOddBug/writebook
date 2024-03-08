@@ -1,0 +1,27 @@
+<% @page_title = "Sign in" %>
+<% turbo_page_requires_reload %>
+
+<section>
+  <div shake" if flash[:alert] %>">
+    <%= form_with url: session_url do |form| %>
+      <fieldset>
+        <legend><strong>Workbook</strong></legend>
+
+        <div>
+          <label>
+            <%= form.email_field :email_address, required: true, class: "input", autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <%= form.password_field :password, required: true, class: "input", autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %>
+          </label>
+        </div>
+
+        <%= form.submit "Sign in" %>
+      </fieldset>
+    <% end %>
+  </div>
+
+</section>

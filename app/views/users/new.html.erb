@@ -1,0 +1,49 @@
+<% @page_title = "Sign up" %>
+
+<%= form_with model: @user, url: join_path(params[:join_code]) do |form| %>
+  <section>
+    <div>
+      <fieldset>
+        <legend>
+          <strong><%= Current.account.name %></strong>
+        </legend>
+
+        <label data-controller="upload-preview">
+          <div>
+            <%= form.file_field :avatar, class: "input", accept: "image/*",
+                  data: { upload_preview_target: "input", action: "upload-preview#previewImage" } %>
+            <span class="for-screen-reader">Upload avatar</span>
+          </div>
+
+          <div>
+            <%= image_tag @user.avatar.attached? ? @user.avatar : "default-avatar.svg", aria: { hidden: "true" }, data: { upload_preview_target: "image" } %>
+            <span class="for-screen-reader">Avatar</span>
+          </div>
+        </label>
+      </fieldset>
+
+      <div>
+        <label>
+          <%= form.text_field :name, class: "input", autocomplete: "name", placeholder: "Name", autofocus: true, required: true,
+                data: { "1p-ignore": true } %>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <%= form.email_field :email_address, class: "input", autocomplete: "username", placeholder: "Email address", required: true %>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <%= form.password_field :password, class: "input", autocomplete: "new-password", placeholder: "Password", required: true, maxlength: 72 %>
+        </label>
+      </div>
+
+      <%= form.button type: "submit" do %>
+        <span class="for-screen-reader">Save</span>
+      <% end %>
+    </div>
+  </section>
+<% end %>
