@@ -3,10 +3,10 @@ class Book < ApplicationRecord
 
   scope :ordered, -> { order(:title) }
 
-  def press(leafable, parent: nil)
+  def press(leafable)
     transaction do
       leafable.save!
-      leafs.create! leafable: leafable, parent: parent
+      leafs.create! leafable: leafable
     end
   end
 end
