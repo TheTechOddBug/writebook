@@ -6,13 +6,17 @@ class Leaf::PositionableTest < ActiveSupport::TestCase
   end
 
   test "items are sorted in positioned order" do
-    assert @leaves.first.position < @leaves.second.position
-
     assert_equal [ leaves(:welcome_section), leaves(:welcome_page), leaves(:summary_page) ], @leaves
   end
 
   test "items can be moved earlier" do
-    leaves(:welcome_page).move_to_position(1)
+    leaves(:welcome_page).move_to_position(0)
+
+    assert_equal [ leaves(:welcome_page), leaves(:welcome_section), leaves(:summary_page) ], @leaves.reload
+  end
+
+  test "items can be moved beyond the start, which puts them at the start" do
+    leaves(:welcome_page).move_to_position(-99)
 
     assert_equal [ leaves(:welcome_page), leaves(:welcome_section), leaves(:summary_page) ], @leaves.reload
   end
@@ -20,12 +24,41 @@ class Leaf::PositionableTest < ActiveSupport::TestCase
   test "items can be moved later" do
     leaves(:welcome_section).move_to_position(2)
 
-    assert_equal [ leaves(:welcome_page), leaves(:welcome_section), leaves(:summary_page) ], @leaves.reload
+    assert_equal [ leaves(:welcome_page), leaves(:summary_page), leaves(:welcome_section) ], @leaves.reload
+  end
+
+  test "items can be moved beyond the end, which puts them at the end" do
+    leaves(:welcome_section).move_to_position(99)
+
+    assert_equal [ leaves(:welcome_page), leaves(:summary_page), leaves(:welcome_section) ], @leaves.reload
   end
 
   test "items can be moved to their existing position" do
-    leaves(:welcome_page).move_to_position(2)
+    leaves(:welcome_page).move_to_position(1)
 
-    assert_equal [ leaves(:welcome_section), leaves(:welcome_page), leaves(:summary_page) ], @leaves
+    assert_equal [ leaves(:welcome_section), leaves(:welcome_page), leaves(:summary_page) ], @leaves.reload
+  end
+
+  test "new items are inserted at the end" do
+    new_page = books(:handbook).press(Page.new(title: "New Page"))
+
+    assert_equal new_page, books(:handbook).leaves.positioned.last
+  end
+
+  test "the first item in the collection has the expected score" do
+    books(:handbook).leaves.destroy_all
+    new_page = books(:handbook).press(Page.new(title: "New Page"))
+
+    assert_equal 1, new_page.position_score
+  end
+
+  test "positioning is rebalanced when necessary" do
+    leaves(:welcome_section).update!(position_score: 1e-11)
+    leaves(:welcome_page).update!(position_score: 2e-11)
+
+    leaves(:summary_page).move_to_position(1)
+
+    assert_equal leaves(:summary_page), @leaves.reload.second
+    assert_equal [ 1, 2, 3 ], @leaves.pluck(:position_score)
   end
 end

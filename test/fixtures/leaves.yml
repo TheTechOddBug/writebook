@@ -1,14 +1,14 @@
 welcome_section:
   book: handbook
   leafable: welcome (Section)
-  position: 1
+  position_score: 1
 
 welcome_page:
   book: handbook
   leafable: welcome (Page)
-  position: 2
+  position_score: 2
 
 summary_page:
   book: handbook
   leafable: summary (Page)
-  position: 3
+  position_score: 3
