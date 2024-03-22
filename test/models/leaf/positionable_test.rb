@@ -61,4 +61,12 @@ class Leaf::PositionableTest < ActiveSupport::TestCase
     assert_equal leaves(:summary_page), @leaves.reload.second
     assert_equal [ 1, 2, 3, 4 ], @leaves.pluck(:position_score)
   end
+
+  test "items know their neighbours" do
+    assert_equal leaves(:welcome_section), leaves(:welcome_page).previous
+    assert_equal leaves(:summary_page), leaves(:welcome_page).next
+
+    assert_nil leaves(:welcome_section).previous
+    assert_nil leaves(:reading_picture).next
+  end
 end

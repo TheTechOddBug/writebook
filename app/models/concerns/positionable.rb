@@ -7,6 +7,9 @@ module Positionable
   included do
     scope :positioned, -> { order(:position_score, :id) }
 
+    scope :before, ->(other) { positioned.where("position_score < ?", other.position_score) }
+    scope :after,  ->(other) { positioned.where("position_score > ?", other.position_score) }
+
     around_create :insert_at_default_position
     after_save_commit :rebalance_positions, if: :rebalance_required?
   end
@@ -27,6 +30,14 @@ module Positionable
 
       private :positioning_parent, :all_positioned_siblings, :other_positioned_siblings
     end
+  end
+
+  def previous
+    other_positioned_siblings.before(self).last
+  end
+
+  def next
+    other_positioned_siblings.after(self).first
   end
 
   def move_to_position(offset)
