@@ -28,6 +28,6 @@
     <h1><%= @picture.title %></h1>
     <%= image_tag @picture.image.variant(:large) %>
   </div>
-
-  <%= render "leaves/navigation", leaf: @leaf %>
 </main>
+
+<%= render "leaves/navigation", leaf: @leaf %>
