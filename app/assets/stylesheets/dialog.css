@@ -9,14 +9,22 @@
       0 1.2em 1.6em -2em oklch(var(--lch-always-black) / 1);
   color: var(--color-ink-reversed);
   border-radius: var(--border-radius, 1em);
-  inline-size: 50ch;
+  inline-size: 70ch;
   max-inline-size: 100%;
   opacity: 0;
-  padding: var(--block-space) var(--inline-space);
+  padding: calc(var(--block-space) * 2);
+  transform: translateY(50%);
+  transform-origin: bottom center;
+  transition:
+      display 0.3s allow-discrete,
+      opacity 0.3s,
+      overlay 0.3s allow-discrete,
+      transform 0.3s;
 
   &::backdrop {
     background-color: var(--color-always-black);
     opacity: 0;
+    transform: translateY(0);
     transition:
       display 0.5s allow-discrete,
       opacity 0.5s,
@@ -25,6 +33,7 @@
 
   &[open] {
     opacity: 1;
+    transform: translateY(0);
 
     &::backdrop {
       opacity: 0.5;
@@ -34,6 +43,7 @@
   @starting-style {
     &[open] {
       opacity: 0;
+      transform: translateY(50%);
     }
 
     &[open]::backdrop {

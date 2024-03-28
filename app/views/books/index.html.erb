@@ -15,10 +15,26 @@
 </div>
 
 <% content_for :footer do %>
-  <div>
-    <%= link_to new_book_path, class: "btn" do %>
+  <div data-controller="popup">
+    <button class="btn", data-action="popup#toggle">
       <%= image_tag "add.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">Create a new book</span>
-    <% end %>
+    </button>
+
+    <dialog class="dialog" data-popup-target="popup">
+      <%= render "books/form", book: Book.new %>
+      <div class="flex align-center gap margin-block-start">
+        <button type="submit" form="book-editor", class="btn btn--positive flex-item-justify-start">
+          <%= image_tag "check.svg", aria: { hidden: true }, size: 24 %>
+          <span class="for-screen-reader">Save</span>
+        </button>
+        <form method="dialog" class="flex-item-justify-end">
+          <button class="btn btn--negative">
+            <%= image_tag "remove.svg", aria: { hidden: true }, size: 24 %>
+            <span class="for-screen-reader">Cancel and close</span>
+          </button>
+        </form>
+      </div>
+    </dialog>
   </div>
 <% end %>

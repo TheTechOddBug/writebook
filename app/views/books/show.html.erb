@@ -56,7 +56,7 @@
       <span class="for-screen-reader">Go back</span>
     <% end %>
 
-    <div data-controller="popup">
+    <div data-controller="popup" class="txt-medium">
       <button class="btn txt-medium", data-action="popup#toggle">
         <%= image_tag "pencil.svg", aria: { hidden: true }, size: 24 %>
         <span class="for-screen-reader">Edit book details</span>
@@ -65,12 +65,12 @@
       <dialog class="dialog" data-popup-target="popup">
         <%= render "books/form", book: @book %>
         <div class="flex align-center gap margin-block-start">
-          <button type="submit" form="book-editor", class="btn btn--positive txt-medium flex-item-justify-start">
+          <button type="submit" form="book-editor", class="btn btn--positive flex-item-justify-start">
             <%= image_tag "check.svg", aria: { hidden: true }, size: 24 %>
             <span class="for-screen-reader">Save</span>
           </button>
           <form method="dialog" class="flex-item-justify-end">
-            <button class="btn btn--negative txt-medium">
+            <button class="btn btn--negative">
               <%= image_tag "remove.svg", aria: { hidden: true }, size: 24 %>
               <span class="for-screen-reader">Cancel and close</span>
             </button>

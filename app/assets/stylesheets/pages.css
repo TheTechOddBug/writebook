@@ -14,9 +14,14 @@
 .page__picker {
   inline-size: auto;
   inset: auto auto -100% 50%;
+  padding: var(--block-space);
   transform: translateX(-50%);
   transform-origin: bottom center;
-  transition: display 0.5s allow-discrete, inset 0.5s allow-discrete, opacity 0.5s, overlay 0.5s allow-discrete;
+  transition:
+    display 0.5s allow-discrete,
+    inset 0.5s allow-discrete,
+    opacity 0.5s,
+    overlay 0.5s allow-discrete;
 
   &::backdrop {
     background-color: oklch(var(--lch-always-black));
@@ -25,6 +30,7 @@
   }
 
   &[open] {
+    transform: translateX(-50%);
     inset-block-end: var(--block-space);
   }
 
