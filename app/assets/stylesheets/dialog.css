@@ -22,7 +22,7 @@
       transform 0.3s;
 
   &::backdrop {
-    background-color: var(--color-always-black);
+    background-color: var(--color-ink);
     opacity: 0;
     transform: translateY(0);
     transition:
