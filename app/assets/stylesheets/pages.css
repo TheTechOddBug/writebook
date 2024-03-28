@@ -36,3 +36,20 @@
 
   img { max-inline-size: unset; }
 }
+
+.page--picture {
+  img {
+    block-size: 100%;
+    object-fit: cover;
+  }
+}
+
+.page--section {
+  background-color: var(--color-border);
+}
+
+:is(.page--picture, .page--section) {
+  block-size: calc(100dvh - (var(--footer-height) * 2) - var(--block-space));
+  display: grid;
+  place-items: center;
+}

@@ -5,8 +5,7 @@
   <%= render "leaves/header", book: @book, leaf: @leaf %>
 <% end %>
 
-<div class="page">
-  <h1><%= @picture.title %></h1>
+<div class="page--picture">
   <%= image_tag @picture.image.variant(:large) %>
 </div>
 
