@@ -21,7 +21,7 @@
         <span class="for-screen-reader">Download</span>
       </button>
 
-      <dialog class="dialog" data-popup-target="popup" data-action="click->popup#close">
+      <dialog class="dialog panel" data-popup-target="popup" data-action="click->popup#close">
         <div class="flex align-center justify-center gap" style="--column-gap: 4ch">
           <div class="flex flex-column justify-center">
             <button class="btn btn--plain txt-x-large center", data-action="popup#toggle">
@@ -95,7 +95,7 @@
         <span class="for-screen-reader">Edit book details</span>
       </button>
 
-      <dialog class="dialog" data-popup-target="popup">
+      <dialog class="dialog panel" data-popup-target="popup">
         <%= render "books/form", book: @book %>
         <div class="flex align-center gap margin-block-start">
           <button type="submit" form="book-editor", class="btn btn--positive flex-item-justify-start">
@@ -166,7 +166,7 @@
       <span class="for-screen-reader">Add a new page</span>
     </button>
 
-    <dialog id="new-page-picker" class="dialog page__picker" data-popup-target="popup" data-action="click->popup#close">
+    <dialog id="new-page-picker" class="dialog panel page__picker" data-popup-target="popup" data-action="click->popup#close">
       <div class="flex align-center justify-center gap">
         <div class="flex flex-column justify-center">
           <%= link_to new_book_page_path(@book), class: "btn btn--plain txt-x-large" do %>

@@ -1,3 +1,9 @@
+/* Animation classes */
+.shake {
+  animation: shake 400ms both;
+}
+
+/* Keyframes */
 @keyframes fade-in {
   from { opacity: 0; }
 }
@@ -14,6 +20,14 @@
   to { transform: translateX(-3rem); }
 }
 
+@keyframes shake {
+  0%  { transform: translateX(-2rem); }
+  25% { transform: translateX(2rem); }
+  50% { transform: translateX(-1rem); }
+  75% { transform: translateX(1rem); }
+}
+
+/* View Transitions */
 ::view-transition-old(root) {
   animation:
     100ms cubic-bezier(0.4, 0, 1, 1) both fade-out,

@@ -22,7 +22,7 @@
           <span class="for-screen-reader">Create a new book</span>
         </button>
 
-        <dialog class="dialog" data-popup-target="popup">
+        <dialog class="dialog panel" data-popup-target="popup">
           <%= render "books/form", book: Book.new %>
           <div class="flex align-center gap margin-block-start">
             <button type="submit" form="book-editor", class="btn btn--positive flex-item-justify-start">

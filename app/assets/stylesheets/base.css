@@ -65,6 +65,18 @@ a:not([class]) {
   }
 }
 
+.panel {
+  --panel-size: 40ch;
+
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-ink);
+  border-radius: var(--border-radius, 1em);
+  inline-size: var(--panel-size);
+  max-inline-size: 100%;
+  padding: calc(var(--block-space) * 2);
+}
+
 /* Nicer scrollbars on Chrome 29+. This is intended for Windows machines, but */
 /* there's not a way to target Windows using CSS, so Chrome on Mac will have */
 /* slightly thinner scrollbars than normal. #C1C1C1 is the default color on Macs. */
