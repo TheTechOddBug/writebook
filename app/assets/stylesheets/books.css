@@ -5,3 +5,25 @@
   margin: auto;
   max-block-size: var(--cover-height, 75dvh);
 }
+
+.bookmark {
+  --icon-space: calc(var(--inline-space) * 1.8);
+
+  inset: var(--progress, 0) 0 auto calc(var(--icon-space) * -1);
+  position: absolute;
+  display: block;
+
+  .bookmark__icon {
+    display: flex;
+    flex-grow: 1;
+
+    &::after {
+      border-block-end: 1px solid var(--color-alert);
+      content: "";
+      display: flex;
+      flex-grow: 0;
+      inline-size: calc(100% - var(--icon-space));
+      margin: auto;
+    }
+  }
+}
