@@ -21,11 +21,3 @@
     line-height: 1.2;
   }
 }
-
-.book__cover {
-  background-color: var(--color-border);
-  border: 1px solid var(--color-border-dark);
-  border-radius: 0.3em;
-  margin: auto;
-  max-block-size: var(--cover-height, 75dvh);
-}
