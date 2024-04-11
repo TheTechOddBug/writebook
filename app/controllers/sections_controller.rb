@@ -6,8 +6,13 @@ class SectionsController < ApplicationController
   end
 
   def create
-    @book.press new_section
-    redirect_to @book
+    @leafable = new_section
+    @book.press @leafable
+
+    respond_to do |format|
+      format.turbo_stream { render }
+      format.html { redirect_to @book }
+    end
   end
 
   def show

@@ -125,8 +125,10 @@
     </label>
   </div>
 
-  <ol class="toc" id="toc">
-    <%= render partial: "leaves/leaf", collection: @leaves, as: :leaf %>
+  <ol class="toc">
+    <%= turbo_frame_tag :leaves do %>
+      <%= render partial: "leaves/leaf", collection: @leaves, as: :leaf %>
+    <% end %>
   </ol>
 </div>
 

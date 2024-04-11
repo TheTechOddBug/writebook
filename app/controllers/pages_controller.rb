@@ -6,8 +6,13 @@ class PagesController < ApplicationController
   end
 
   def create
-    @book.press new_page
-    redirect_to @book
+    @leafable = new_page
+    @book.press @leafable
+
+    respond_to do |format|
+      format.turbo_stream { render }
+      format.html { redirect_to @book }
+    end
   end
 
   def show

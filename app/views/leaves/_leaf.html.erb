@@ -1,4 +1,4 @@
-<li class="toc__leaf toc__leaf--<%= leaf.leafable_name%>" draggable="true">
+<li class="toc__leaf toc__leaf--<%= leaf.leafable_name%>" id="<%= dom_id leaf %>">
   <%= image_tag "handle.svg", aria: { hidden: true }, size: 24, class: "toc__handle" %>
 
   <%= link_to leafable_path(leaf), class: "toc__thumbnail" do %>
