@@ -151,13 +151,17 @@ export default class extends Controller {
   }
 
   dragOver(event) {
-    if (event.target.tagName == "LI" && !this.#targetIsSelected(event.target)) {
+    if (this.itemTargets.includes(event.target) && !this.#targetIsSelected(event.target)) {
       const offset = this.itemTargets.indexOf(this.#dragItem) - this.itemTargets.indexOf(event.target)
       const isBefore = offset < 0
       const rect = event.target.getBoundingClientRect()
-      const mid = rect.top + rect.height / 2.0
+      const selectionRect = this.#selectedItems[isBefore ? 0 : this.#selectionSize - 1].getBoundingClientRect()
+      const sameRow = rect.top === selectionRect.top
 
-      if (event.clientY < mid && !isBefore) {
+      const mid = sameRow ? rect.left + rect.width / 2.0 :  rect.top + rect.height / 2.0
+      const ref = sameRow ? event.clientX : event.clientY
+
+      if (ref < mid && !isBefore) {
         this.#keepingSelection(() => {
           event.target.before(...this.#selectedItems)
         })
@@ -165,7 +169,7 @@ export default class extends Controller {
         this.#renderSelection()
       }
 
-      if (event.clientY > mid && isBefore) {
+      if (ref > mid && isBefore) {
         this.#keepingSelection(() => {
           event.target.after(...this.#selectedItems)
         })
