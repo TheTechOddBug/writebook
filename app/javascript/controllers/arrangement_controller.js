@@ -46,6 +46,8 @@ export default class extends Controller {
   moveBefore(event) {
     if (!this.#arrangeMode) { return }
 
+    event.preventDefault()
+
     if (this.#moveMode) {
       this.#moveSelection(Direction.BEFORE)
     } else {
@@ -57,6 +59,8 @@ export default class extends Controller {
   moveAfter(event) {
     if (!this.#arrangeMode) { return }
 
+    event.preventDefault()
+
     if (this.#moveMode) {
       this.#moveSelection(Direction.AFTER)
     } else {
@@ -65,8 +69,10 @@ export default class extends Controller {
     }
   }
 
-  toggleMoveMode() {
+  toggleMoveMode(event) {
     if (!this.#arrangeMode) { return }
+
+    event.preventDefault()
 
     if (this.#moveMode) {
       this.applyMoveMode()
@@ -78,8 +84,10 @@ export default class extends Controller {
     this.#renderSelection()
   }
 
-  applyMoveMode() {
+  applyMoveMode(event) {
     if (!this.#arrangeMode) { return }
+
+    event.preventDefault()
 
     this.#moveMode = false
     this.#originalOrder = undefined
@@ -87,8 +95,10 @@ export default class extends Controller {
     this.#submitMove()
   }
 
-  cancelMoveMode() {
+  cancelMoveMode(event) {
     if (!this.#arrangeMode) { return }
+
+    event.preventDefault()
 
     if (this.#moveMode) {
       this.containerTarget.append(...this.#originalOrder)
