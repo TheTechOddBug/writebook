@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users
+
   direct :leafable do |leaf, options|
     route_for "book_#{leaf.leafable_name}", leaf.book, leaf.leafable, options
   end

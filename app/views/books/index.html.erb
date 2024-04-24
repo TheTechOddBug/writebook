@@ -1,4 +1,17 @@
-<% content_for(:title) { "Books" } %>
+<% content_for(:title) { "Library" } %>
+
+<% content_for :header do %>
+  <nav>
+    <div class="breadcrumbs flex-item-justify-end">
+      <%= image_tag "books.svg", aria: { label: "Books" }, size: 19, class: "colorize--black", alt: "Books" %>
+    </div>
+
+    <%= link_to users_path, class: "btn flex-item-justify-end" do %>
+      <%= image_tag "settings.svg", aria: { hidden: true }, size: 24 %>
+      <span class="for-screen-reader">Account settings</span>
+    <% end %>
+  </nav>
+<% end %>
 
 <div class="library">
   <%= render @books %>

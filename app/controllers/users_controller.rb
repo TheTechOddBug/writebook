@@ -3,6 +3,10 @@ class UsersController < ApplicationController
 
   before_action :verify_join_code, only: %i[ new create ]
 
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end

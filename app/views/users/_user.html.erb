@@ -1,0 +1,14 @@
+<div class="flex align-center gap-half pad-inline">
+  <%= user.name %>
+  <hr class="flex-item-grow margin-none">
+  <label class="btn txt-small">
+    <input type="checkbox">
+    <%= image_tag "crown.svg", aria: { hidden: true }, size: 24 %>
+    <span class="for-screen-reader">Admin</span>
+  </label>
+
+  <%= tag.button class: "btn btn--negative txt-small" do %>
+    <%= image_tag "trash.svg", aria: { hidden: true }, size: 24 %>
+    <span class="for-screen-reader">Remove <%= user.name %> from the account</span>
+  <% end %>
+</div>
