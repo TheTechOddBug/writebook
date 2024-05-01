@@ -22,31 +22,8 @@
   </nav>
 <% end %>
 
-<aside class="txt-align-center pad fill-shade border-radius">
+<aside class="txt-align-center">
   <%= image_tag @book.cover.attached? ? @book.cover : "default-cover.webp", alt: "Book cover", class: "book__cover margin-none" %>
-
-  <div class="flex flex-column gap txt-medium margin-block">
-    <div>
-      <div class="flex align-center gap">
-        <hr class="flex-item-grow margin-none">
-        <strong class="txt-uppercase">Published</strong>
-        <hr class="flex-item-grow margin-none">
-      </div>
-
-      <p>April 30, 2024</p>
-    </div>
-
-    <div>
-      <div class="flex align-center gap">
-        <hr class="flex-item-grow margin-none">
-        <strong class="txt-uppercase">URL</strong>
-        <hr class="flex-item-grow margin-none">
-      </div>
-      <p>
-        <%= link_to "#{root_url}books/#{ @book.title.parameterize }." %>
-      </p>
-    </div>
-  </div>
 
   <div hidden class="flex-inline align-center gap center margin-block-start pad-inline pad-block-half fill-shade border-radius">
     <%= image_tag "lock.svg", aria: { hidden: true }, size: 36, class: "colorize--black" %>
