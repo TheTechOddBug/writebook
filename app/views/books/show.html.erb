@@ -46,23 +46,6 @@
         <%= link_to "#{root_url}books/#{ @book.title.parameterize }." %>
       </p>
     </div>
-
-    <div>
-      <div class="flex align-center gap">
-        <hr class="flex-item-grow margin-none">
-        <strong class="txt-uppercase">Formats</strong>
-        <hr class="flex-item-grow margin-none">
-      </div>
-      <div class="flex flex-wrap gap justify-center margin-block">
-        <% ["pdf", "mobi", "html", "epub"].each do |format| %>
-          <%= link_to nil, class: "txt-ink" do %>
-            <div class="center">
-              <%= image_tag "file-#{format}.svg", aria: { hidden: true }, size: 36, class: "colorize--black" %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
   </div>
 
   <div hidden class="flex-inline align-center gap center margin-block-start pad-inline pad-block-half fill-shade border-radius">
