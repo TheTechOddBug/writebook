@@ -1,7 +1,7 @@
 <% content_for(:title) { "Sign in" } %>
 <% turbo_page_requires_reload %>
 
-<div class="panel center <%="shake" if flash[:alert] %>">
+<div class="panel borderless shadow center margin-block-double <%="shake" if flash[:alert] %>">
   <%= form_with url: session_url, class: "flex flex-column gap" do |form| %>
     <%= form.email_field :email_address, required: true, class: "input", autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %>
     <%= form.password_field :password, required: true, class: "input", autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %>

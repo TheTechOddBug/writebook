@@ -10,7 +10,7 @@
   </nav>
 <% end %>
 
-<div class="panel center <%="shake" if flash[:alert] %>">
+<div class="panel borderless margin-block-double shadow center <%="shake" if flash[:alert] %>">
   <%= form_with model: @user, url: join_path(params[:join_code]), class: "flex flex-column gap" do |form| %>
     <%= form.text_field :name, class: "input", autocomplete: "name", placeholder: "Name", autofocus: true, required: true, data: { "1p-ignore": true } %>
     <%= form.email_field :email_address, class: "input", autocomplete: "username", placeholder: "Email address", required: true %>
