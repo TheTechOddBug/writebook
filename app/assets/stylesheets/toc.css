@@ -48,8 +48,16 @@
   margin-block-end: var(--block-space-half);
   overflow: clip;
   padding: 10cqi;
+  position: relative;
   text-align: start;
   text-decoration: none;
+
+  .toc__link {
+    inset: 0;
+    overflow: clip;
+    padding: 100%;
+    position: absolute;
+  }
 
   .toc__leaf--section & {
     align-items: center;
