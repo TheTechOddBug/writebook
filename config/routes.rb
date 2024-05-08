@@ -17,14 +17,6 @@ Rails.application.routes.draw do
     resources :leaves
 
     scope module: "books" do
-      resources :users do
-        scope module: "users" do
-          resource :access, only: %i[ create destroy ]
-        end
-      end
-    end
-
-    scope module: "books" do
       namespace :leaves do
         resources :moves, only: :create
       end

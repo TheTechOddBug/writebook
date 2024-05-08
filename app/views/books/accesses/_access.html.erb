@@ -1,10 +1,18 @@
-<%= turbo_frame_tag user, :access do %>
-  <div class="flex align-center gap-half pad-inline">
-    <span class="overflow-ellipsis"><%= user.name %></span>
-    <hr class="flex-item-grow margin-none">
+<div class="flex align-center gap-half pad-inline" data-controller="radio-checkbox">
+  <span class="overflow-ellipsis"><%= user.name %></span>
+  <hr class="flex-item-grow margin-none">
 
-    <% if Current.user.can_administer? && user != Current.user %>
-      <%= render "books/accesses/#{book.access_level_for(user: user)}", user: user, book: book %>
-    <% end %>
-  </div>
-<% end %>
+  <% if Current.user.can_administer? %>
+    <label class="btn txt-small flex-item-no-shrink">
+      <%= check_box_tag "editor_ids[]", user.id, book.editable?(user: user), id: nil, disabled: user.current?, data: { action: "radio-checkbox#input", radio_checkbox_target: "checkbox" } %>
+      <%= image_tag "write.svg", size: 24, aria: { hidden: "true" } %>
+      <span class="for-screen-reader">Role: Writer</span>
+    </label>
+
+    <label class="btn txt-small flex-item-no-shrink">
+      <%= check_box_tag "reader_ids[]", user.id, book.readonly?(user: user), id: nil, disabled: user.current?, data: { action: "radio-checkbox#input", radio_checkbox_target: "checkbox" } %>
+      <%= image_tag "eye.svg", size: 24, aria: { hidden: "true" } %>
+      <span class="for-screen-reader">Role: Reader</span>
+    </label>
+  <% end %>
+</div>

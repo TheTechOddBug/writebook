@@ -22,7 +22,22 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 
     book = Book.last
     assert_equal "New Book", book.title
-    assert book.editable?(user: users(:kevin))
     assert_equal 1, Book.last.accesses.count
+
+    assert book.editable?(user: users(:kevin))
   end
+
+  test "create sets additional accesses" do
+    assert_difference -> { Book.count }, +1 do
+      post books_url, params: { book: { title: "New Book" }, "editor_ids[]": users(:jz).id, "reader_ids[]": users(:jason).id }
+    end
+
+    book = Book.last
+    assert_equal "New Book", book.title
+    assert_equal 3, Book.last.accesses.count
+
+    assert book.editable?(user: users(:jz))
+    assert book.readonly?(user: users(:jason))
+  end
+
 end

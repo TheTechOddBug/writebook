@@ -14,6 +14,10 @@ class User < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :ordered, -> { order(:name) }
 
+  def current?
+    self == Current.user
+  end
+
   def deactivate
     transaction do
       sessions.delete_all

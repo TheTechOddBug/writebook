@@ -17,10 +17,6 @@
 
 <%= render "books/form", book: @book %>
 
-<div class="border-radius center pad fill-shade flex flex-column gap margin-block-double">
-  <%= render partial: "books/accesses/access", collection: @accesses, as: :user, locals: { book: @book } %>
-</div>
-
 <div class="flex flex-column justify-center txt-align-center margin-block-double">
   <%= button_to book_path(@book), method: :delete, class: "btn btn--negative center txt-medium",
         data: { turbo_confirm: "Are you sure you want to delete this book? It cannot be undone." } do %>

@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
-  before_action :set_accesses, only: %i[ new edit ]
+  before_action :set_users, only: %i[ new edit ]
 
   def index
     @books = Current.user.books.ordered
@@ -12,6 +12,8 @@ class BooksController < ApplicationController
 
   def create
     book = Current.user.books.editable.create! book_params
+    update_accesses(book)
+
     redirect_to book
   end
 
@@ -24,6 +26,8 @@ class BooksController < ApplicationController
 
   def update
     @book.update(book_params)
+    update_accesses(@book)
+
     redirect_to @book
   end
 
@@ -42,7 +46,11 @@ class BooksController < ApplicationController
       params.require(:book).permit(:title, :subtitle, :author, :cover)
     end
 
-    def set_accesses
-      @accesses = User.active.ordered
+    def set_users
+      @users = User.active.ordered
+    end
+
+    def update_accesses(book)
+      book.update_accesses(Array(params[:reader_ids]), Array(params[:editor_ids]), excluding: Current.user)
     end
 end
