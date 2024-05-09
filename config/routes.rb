@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     route_for "edit_book_#{leaf.leafable_name}", leaf.book, leaf.leafable, options
   end
 
-  namespace :action_text do
+  namespace :action_text, path: nil do
     get "/u/*slug" => "markdown/uploads#show", as: :markdown_upload
     post "/uploads" => "markdown/uploads#create", as: :markdown_uploads
   end
