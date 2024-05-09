@@ -10,8 +10,8 @@ class ActionText::Markdown::UploadsControllerTest < ActionDispatch::IntegrationT
       post action_text_markdown_uploads_url, params: {
         record_gid: pages(:welcome).to_signed_global_id.to_s,
         attribute_name: "body",
-        upload: fixture_file_upload("reading.webp", "image/webp")
-      }
+        file: fixture_file_upload("reading.webp", "image/webp")
+      }, as: :xhr
     end
 
     assert_response :success
@@ -23,7 +23,7 @@ class ActionText::Markdown::UploadsControllerTest < ActionDispatch::IntegrationT
 
     attachment = pages(:welcome).body.uploads.last
 
-    get action_text_markdown_upload_url(id: attachment.slug, ext: "webp")
+    get action_text_markdown_upload_url(slug: attachment.slug)
 
     assert_response :redirect
     assert_match /\/rails\/active_storage\/.*\/reading\.webp/, @response.redirect_url

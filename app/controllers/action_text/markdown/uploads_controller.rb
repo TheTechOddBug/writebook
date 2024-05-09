@@ -7,13 +7,15 @@ class ActionText::Markdown::UploadsController < ApplicationController
     @record = GlobalID::Locator.locate_signed params[:record_gid]
 
     @markdown = @record.safe_markdown_attribute params[:attribute_name]
-    @markdown.save! unless @markdown.persisted?
+    @markdown.uploads.attach [ params[:file] ]
 
-    @markdown.uploads.attach params[:upload]
+    @upload = @markdown.reload.uploads.attachments.last
+
+    render :create, status: :created, formats: :json
   end
 
   def show
-    @attachment = ActiveStorage::Attachment.find_by! slug: "#{params[:id]}.#{params[:ext]}"
+    @attachment = ActiveStorage::Attachment.find_by! slug: "#{params[:slug]}.#{params[:format]}"
     redirect_to @attachment.url
   end
 end

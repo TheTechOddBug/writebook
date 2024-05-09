@@ -36,15 +36,17 @@ Rails.application.routes.draw do
   resources :qr_code, only: :show
   resources :users
 
-  get "/u/:id(.:ext)", to: "action_text/markdown/uploads#show", as: :action_text_markdown_upload
-  resources :action_text_markdown_uploads, only: [ :create ], controller: "action_text/markdown/uploads"
-
   direct :leafable do |leaf, options|
     route_for "book_#{leaf.leafable_name}", leaf.book, leaf.leafable, options
   end
 
   direct :edit_leafable do |leaf, options|
     route_for "edit_book_#{leaf.leafable_name}", leaf.book, leaf.leafable, options
+  end
+
+  namespace :action_text do
+    get "/u/*slug" => "markdown/uploads#show", as: :markdown_upload
+    post "/uploads" => "markdown/uploads#create", as: :markdown_uploads
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

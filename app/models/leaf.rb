@@ -1,5 +1,5 @@
 class Leaf < ApplicationRecord
-  include Attachable, Editable, Positionable, Status
+  include Editable, Positionable, Status
 
   belongs_to :book
   positioned_within :book, association: :leaves
