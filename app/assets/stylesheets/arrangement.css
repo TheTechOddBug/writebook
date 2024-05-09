@@ -1,7 +1,4 @@
-.toc {
-  /* I don't think we actually want to remove this, since it's needed for
-   * accessibility. I'm just hiding it for now because, with the current use of
-   * borders on the selections, it looks very message */
+.toc:focus:not(:focus-visible) {
   outline: none;
 }
 
