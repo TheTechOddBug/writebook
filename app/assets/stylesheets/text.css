@@ -81,13 +81,6 @@ blockquote {
 
   p {
     hyphens: none;
-    text-align: left;
-
-    &:first-of-type::first-letter {
-      -webkit-initial-letter: normal;
-      initial-letter: normal;
-      margin: 0;
-    }
   }
 }
 
