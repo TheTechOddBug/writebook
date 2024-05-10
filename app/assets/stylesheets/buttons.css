@@ -26,6 +26,7 @@
       block-size: calc(var(--btn-size) / 1.9);
       inline-size: calc(var(--btn-size) / 1.9);
       max-inline-size: unset;
+      pointer-events: none;
       user-select: none;
     }
 
@@ -60,6 +61,7 @@
       appearance: none;
       block-size: calc(var(--btn-size) - var(--outline-size));
       border-radius: var(--btn-border-radius);
+      cursor: pointer;
       display: flex;
       inline-size: calc(var(--btn-size) - var(--outline-size));
       margin: 0;
