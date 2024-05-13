@@ -10,7 +10,7 @@
   padding-inline: clamp(var(--inline-space), 5cqi, calc(var(--inline-space) * 3));
   text-align: start;
 
-  &:where(.index) {
+  &:where(.book) {
     column-gap: 3dvw;
     display: grid;
     grid-template-columns: minmax(200px, 18dvw) 1fr;
