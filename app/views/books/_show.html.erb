@@ -1,0 +1,112 @@
+<% content_for(:title) { book.title } %>
+<% @layout_class = "index" %>
+
+<% content_for :header do %>
+  <nav>
+    <% if Current.user %>
+      <%= link_to books_path, class: "btn flex-item-justify-start" do %>
+        <%= image_tag "arrow-left.svg", aria: { hidden: true }, size: 24 %>
+        <span class="for-screen-reader">Go back</span>
+      <% end %>
+    <% end %>
+
+    <div class="breadcrumbs">
+      <%= link_to books_path do %>
+        <%= image_tag "books.svg", aria: { label: "Books" }, size: 19, class: "colorize--black", alt: "Books" %>
+      <% end %> ▸
+      <strong><%= book.title %></strong>
+    </div>
+
+    <% if book.editable? %>
+      <%= link_to edit_book_path(book), class: "btn flex-item-justify-end" do %>
+        <%= image_tag "pencil.svg", aria: { hidden: true }, size: 24 %>
+        <span class="for-screen-reader">Edit book settings</span>
+      <% end %>
+    <% end %>
+  </nav>
+<% end %>
+
+<aside class="txt-align-center">
+  <%= image_tag book.cover.attached? ? book.cover : "default-cover.webp", alt: "Book cover", class: "book__cover margin-none" %>
+
+  <% if book.editable? || book.published? %>
+    <%= turbo_frame_tag book, :publication do %>
+      <%= render "books/publications/publication", book: book %>
+    <% end %>
+  <% end %>
+</aside>
+
+<%= arrangement_tag book, class: "arrangement__container toc__container full-width txt-align-center" do %>
+  <h1 class="txt-align-start margin-block-none flex flex-column gap txt-tight-lines" style="row-gap: 0.1lh;">
+    <strong class="book__title"><%= book.title %></strong>
+    <small class="txt-medium-container txt-normal"><%= book.subtitle %></small>
+    <small class="txt-medium-container txt-normal translucent"><%= book.author %></small>
+  </h1>
+
+  <div class="book__toolbar flex gap-half pad-block" data-controller="toc-view" data-toc-view-id-value="<%= dom_id(book) %>">
+    <% if book.editable? %>
+      <%= button_to [ book, Page.new ], params: { page: { title: "Untitled"} }, class: "btn btn--plain txt-medium hide-when-arranging" do %>
+        <svg viewBox="0 0 20 24" xmlns="http://www.w3.org/2000/svg" fill="var(--color-ink)" height="60vmin" width="60vmin">
+          <path d="m15.8 21.7c0 .3-.2.4-.4.4h-13.5-.2v-16.9c0-.3.2-.4.4-.4h6.3c0-.6.1-1.2.3-1.8h-6.9c-1 0-1.8.8-1.8 1.8v17.5c0 1 .8 1.8 1.8 1.8h14c.9 0 1.6-.6 1.8-1.4v-11.6c-.5.2-1.1.4-1.8.5v10.3z"/>
+          <path fill="var(--color-positive)" d="m15 0c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm1.9 5.6h-1.2c-.1 0-.2 0-.2.2v1.2c0 .3-.3.6-.6.6s-.6-.3-.6-.6v-1.2c0-.1 0-.2-.2-.2h-1.2c-.3 0-.6-.3-.6-.6s.3-.6.6-.6h1.2c.1 0 .2 0 .2-.2v-1.2c0-.3.3-.6.6-.6s.6.3.6.6v1.2c0 .1 0 .2.2.2h1.2c.3 0 .6.3.6.6s-.3.6-.6.6z"/>
+          <path d="m4.4 16.3.4-.4c.3-.3.8-.3 1.1 0 1 .9 2.5.9 3.4 0 .3-.3.8-.3 1.1 0 1 1 2.5 1 3.4 0l.3-.3c.3-.3.3-.8 0-1.1s-.8-.3-1.1 0l-.3.3c-.3.3-.8.3-1.1 0-1-1-2.5-1-3.4 0-.3.3-.8.3-1.1 0-1-1-2.5-1-3.4 0l-.4.4c-.3.3-.3.8 0 1.1s.8.3 1.1 0z"/>
+          <path d="m4.5 20.1.5-.5c.4-.4.9-.4 1.3 0 1.1 1.1 2.8 1.1 3.9 0 .3-.4.3-.9 0-1.3-.4-.3-.9-.3-1.3 0s-.9.3-1.3 0c-1.1-1.1-2.8-1.1-3.9 0l-.5.5c-.3.4-.3.9 0 1.3.4.3.9.3 1.3 0z"/>
+          <path d="m12.8 11.2c-.3.3-.8.3-1.1 0-1-1-2.5-1-3.4 0-.3.3-.8.3-1.1 0-1-1-2.5-1-3.4 0s-.4.4-.4.4c-.3.3-.3.8 0 1.1s.8.3 1.1 0 .4-.4.4-.4c.3-.3.8-.3 1.1 0 1 .9 2.5.9 3.4 0 .3-.3.8-.3 1.1 0 1 1 2.5 1 3.4 0s.3-.3.3-.3c.2-.2.3-.4.2-.6-.6 0-1.1-.2-1.6-.3z"/>
+          <path d="m8.3 7.6c-.3.3-.8.3-1.1 0-1-1-2.5-1-3.4 0l-.4.4c-.3.3-.3.8 0 1.1s.8.3 1.1 0 .4-.4.4-.4c.3-.3.8-.3 1.1 0 1 .9 2.5.9 3.4 0 0 0 .1-.1.2-.1-.3-.4-.5-.9-.7-1.4-.2.1-.4.3-.6.4z"/>
+        </svg>
+        <span class="for-screen-reader">Add a new text page</span>
+      <% end %>
+
+      <%= button_to [ book, Picture.new ], params: { picture: { title: "Picture"} }, class: "btn btn--plain txt-medium hide-when-arranging" do %>
+        <svg viewBox="0 0 20 24" xmlns="http://www.w3.org/2000/svg" fill="var(--color-ink)" height="60vmin" width="60vmin">
+          <path d="m14.4 16.8s.2-.2.2-.3v-5.1c-2.8-.2-5.1-2.2-5.8-4.9h-4.2c-.8 0-1.4.6-1.4 1.4v11.1c0 .8.6 1.5 1.5 1.5h1.2s.2 0 .3-.2l4.4-6.8c.2-.3.3-.4.7-.4s.5.2.7.4l2.2 3.1c0 .2.3.2.4 0zm-7.3-1.9c-.9 0-1.7-.8-1.7-1.7s.8-1.7 1.7-1.7 1.7.8 1.7 1.7-.8 1.7-1.7 1.7z"/>
+          <path d="m11.2 15.8c0-.2-.2-.2-.3 0s-2.6 4.1-2.6 4.1v.4h.2 4.3c.3 0 .7-.2.8-.3s.2-.2 0-.3l-2.4-3.8z"/>
+          <path d="m15.8 21.7c0 .3-.2.4-.4.4h-13.5-.2v-16.9c0-.3.2-.4.4-.4h6.3c0-.6.1-1.2.3-1.8h-6.9c-1 0-1.8.8-1.8 1.8v17.5c0 1 .8 1.8 1.8 1.8h14c.9 0 1.6-.6 1.8-1.4v-11.6c-.5.2-1.1.4-1.8.5v10.3z"/>
+          <path fill="var(--color-positive)" d="m15 0c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm1.9 5.6h-1.2c-.1 0-.2 0-.2.2v1.2c0 .3-.3.6-.6.6s-.6-.3-.6-.6v-1.2c0-.1 0-.2-.2-.2h-1.2c-.3 0-.6-.3-.6-.6s.3-.6.6-.6h1.2c.1 0 .2 0 .2-.2v-1.2c0-.3.3-.6.6-.6s.6.3.6.6v1.2c0 .1 0 .2.2.2h1.2c.3 0 .6.3.6.6s-.3.6-.6.6z"/>
+        </svg>
+        <span class="for-screen-reader">Add a new picture page</span>
+      <% end %>
+
+      <%= button_to [ book, Section.new ], params: { section: { title: "Section"} }, class: "btn btn--plain txt-medium hide-when-arranging flex-item-justify-start" do %>
+        <svg viewBox="0 0 20 24" xmlns="http://www.w3.org/2000/svg" fill="var(--color-ink)" height="60vmin" width="60vmin">
+          <path d="m15 11.5c-3.6 0-6.5-2.9-6.5-6.5s0-.2 0-.2h-6.3c-.3 0-.4.2-.4.4v16.9s0 .2.2 0h13.4c.3 0 .4-.2.4-.4v-10.3c-.2 0-.5 0-.8 0z" opacity=".3"/>
+          <path d="m15.8 21.7c0 .3-.2.4-.4.4h-13.5-.2v-16.9c0-.3.2-.4.4-.4h6.3c0-.6.1-1.2.3-1.8h-6.9c-1 0-1.8.8-1.8 1.8v17.5c0 1 .8 1.8 1.8 1.8h14c.9 0 1.6-.6 1.8-1.4v-11.6c-.5.2-1.1.4-1.8.5v10.3z"/>
+          <path fill="var(--color-positive)" d="m15 0c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm1.9 5.6h-1.2c-.1 0-.2 0-.2.2v1.2c0 .3-.3.6-.6.6s-.6-.3-.6-.6v-1.2c0-.1 0-.2-.2-.2h-1.2c-.3 0-.6-.3-.6-.6s.3-.6.6-.6h1.2c.1 0 .2 0 .2-.2v-1.2c0-.3.3-.6.6-.6s.6.3.6.6v1.2c0 .1 0 .2.2.2h1.2c.3 0 .6.3.6.6s-.3.6-.6.6z"/>
+          <path d="m4.4 14.5.4-.4c.3-.3.8-.3 1.1 0 1 .9 2.5.9 3.4 0 .3-.3.8-.3 1.1 0 1 1 2.5 1 3.4 0l.3-.3c.3-.3.3-.8 0-1.1s-.8-.3-1.1 0l-.3.3c-.3.3-.8.3-1.1 0-1-1-2.5-1-3.4 0-.3.3-.8.3-1.1 0-1-1-2.5-1-3.4 0l-.4.4c-.3.3-.3.8 0 1.1s.8.3 1.1 0z"/>
+        </svg>
+        <span class="for-screen-reader">Add a new section page</span>
+      <% end %>
+    <% end %>
+
+    <label class="btn txt-medium flex-item-justify-end">
+      <input type="radio" name="view" id="toc-list" value="list" checked="checked" data-toc-view-target="switch" data-toc-view-type-value="list" data-action="toc-view#saveViewPref">
+      <%= image_tag "view-list.svg", aria: { hidden: true }, size: 24 %>
+      <span class="for-screen-reader">List view</span>
+    </label>
+
+    <label class="btn txt-medium">
+      <input type="radio" name="view" id="toc-grid" value="grid" data-toc-view-target="switch" data-toc-view-type-value="grid" data-action="toc-view#saveViewPref">
+      <%= image_tag "view-grid.svg", aria: { hidden: true }, size: 24 %>
+      <span class="for-screen-reader">Page view</span>
+    </label>
+
+    <% if book.editable? %>
+      <label class="btn txt-medium flex-item-justify-end">
+        <input type="checkbox" name="arrange-mode" id="arrange-mode" data-action="arrangement#setArrangeMode">
+        <%= image_tag "rearrange.svg", aria: { hidden: true }, size: 24 %>
+        <span class="for-screen-reader">Rearrange</span>
+      </label>
+    <% end %>
+  </div>
+
+  <div class="position-relative margin-block-start">
+    <div class="toc" tabindex="0" data-arrangement-target="container" data-action="<%= arrangement_actions %>">
+      <%= turbo_frame_tag :leaves do %>
+        <%= render partial: "leaves/leaf", collection: @leaves, as: :leaf %>
+      <% end %>
+    </div>
+
+    <div data-arrangement-target="layer" class="toc"></div>
+    <div data-arrangement-target="dragImage" class="arrangement-drag-image"></div>
+  </div>
+<% end %>
