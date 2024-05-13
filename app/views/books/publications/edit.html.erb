@@ -13,6 +13,7 @@
             <%= form.text_field :slug,
                   autofocus: true,
                   class: class_names("input fill-white", "shake" => @book.errors[:slug].any?),
+                  required: true,
                   pattern: "^[\\-A-Za-z0-9]+$",
                   title: "Enter letters, numbers, or hyphens only" %>
           </span>
