@@ -1,12 +1,24 @@
 <%= form_with model: book, id: "book-editor" do |form| %>
   <div class="flex align-center gap full-width" style="--input-padding: 0.5rem 1rem; --input-border-radius: 0.5rem">
-    <label class="input--file" data-controller="upload-preview">
-      <%= image_tag book.cover.attached? ? book.cover : "default-cover.webp", alt: "Book cover", size: 300,
-          class: "book__cover margin-none", style: "--cover-height: 50dvh",
-          data: { upload_preview_target: "image" } %>
-      <%= form.file_field :cover, class: "input", accept: "image/*",
-          data: { upload_preview_target: "input", action: "upload-preview#previewImage" } %>
-    </label>
+    <%= tag.div class: "flex flex-column", data: { controller: "upload-preview", upload_preview_default_image_value: asset_url("default-cover.webp") } do %>
+      <label class="align-center center gap">
+        <div class="input--file">
+          <%= image_tag book.cover.attached? ? book.cover : "default-cover.webp", alt: "Book cover", size: 300,
+              class: "book__cover margin-none", style: "--cover-height: 50dvh",
+              data: { upload_preview_target: "image" } %>
+          <%= form.file_field :cover, class: "input", accept: "image/*",
+              data: { upload_preview_target: "input", action: "upload-preview#previewImage" } %>
+        </div>
+      </label>
+
+      <% if book.cover.attached? %>
+        <%= tag.label class:"btn btn--negative txt-small center book__cover--remove", data: { action: "click->upload-preview#clear", upload_preview_target: "button" } do %>
+          <%= image_tag "minus.svg", aria: { hidden: "true" }, size: 24 %>
+          <%= check_box_tag "remove_cover_id", book.cover.id %>
+          <span class="for-screen-reader">Remove cover image</span>
+        <% end %>
+      <% end %>
+    <% end %>
 
     <div class="flex flex-column gap full-width">
       <h1 class="txt-xx-large margin-none">

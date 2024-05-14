@@ -4,6 +4,10 @@
   max-block-size: var(--cover-height, 75dvh);
 }
 
+.book__cover--remove {
+  margin-block-start: calc(var(--block-space) * -1);
+}
+
 .bookmark {
   --icon-space: calc(var(--inline-space) * 1.8);
 
