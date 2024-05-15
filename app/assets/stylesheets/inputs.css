@@ -136,6 +136,11 @@
     inline-size: auto;
     min-inline-size: 20ch;
     outline: 0;
+
+    &.full-width {
+      field-sizing: unset;
+      inline-size: 100%;
+    }
   }
 
   &:has(.input:is(
