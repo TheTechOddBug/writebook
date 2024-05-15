@@ -14,7 +14,7 @@
       <% if book.cover.attached? %>
         <%= tag.label class:"btn btn--negative txt-small center book__cover--remove", data: { action: "click->upload-preview#clear", upload_preview_target: "button" } do %>
           <%= image_tag "minus.svg", aria: { hidden: "true" }, size: 24 %>
-          <%= check_box_tag "remove_cover_id", book.cover.id %>
+          <%= check_box_tag "remove_cover", "true" %>
           <span class="for-screen-reader">Remove cover image</span>
         <% end %>
       <% end %>

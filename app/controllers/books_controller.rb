@@ -27,7 +27,7 @@ class BooksController < ApplicationController
   def update
     @book.update(book_params)
     update_accesses(@book)
-    remove_cover if params[:remove_cover_id].present?
+    remove_cover if params[:remove_cover] == "true"
 
     redirect_to @book
   end
@@ -44,7 +44,7 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :subtitle, :author, :cover, :remove_cover_id)
+      params.require(:book).permit(:title, :subtitle, :author, :cover, :remove_cover)
     end
 
     def set_users
@@ -56,6 +56,6 @@ class BooksController < ApplicationController
     end
 
     def remove_cover
-      ActiveStorage::Attachment.find(params[:remove_cover_id]).purge
+      @book.cover.purge
     end
 end
