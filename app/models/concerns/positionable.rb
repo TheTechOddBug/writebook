@@ -58,7 +58,15 @@ module Positionable
     end
   end
 
+  def position_as_percentage
+    100 * ordinal_position.to_f / all_positioned_siblings.count
+  end
+
   private
+    def ordinal_position
+      other_positioned_siblings.before(self).count + 1
+    end
+
     def insert_at_default_position
       with_positioning_lock do
         position_at_end

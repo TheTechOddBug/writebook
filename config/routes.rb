@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :books do
     resources :leaves
     resource :publication, controller: "books/publications", only: %i[ show edit update ]
+    resource :bookmark, controller: "books/bookmarks", only: :show
 
     scope module: "books" do
       namespace :leaves do
