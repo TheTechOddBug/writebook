@@ -91,6 +91,7 @@
     align-items: center;
     background-color: var(--color-subtle);
     display: flex;
+    font-size: var(--font-medium-responsive);
     font-weight: 900;
     justify-content: center;
   }
