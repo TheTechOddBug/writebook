@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+require "bundler/inline"
+require "yaml"
+
+gemfile do
+  source "https://rubygems.org"
+  gem "base64"
+  gem "bcrypt_pbkdf"
+  gem "ed25519"
+  gem "sshkit"
+end
+
+include SSHKit::DSL
+
+IMAGE_NAME = "workbook-export"
+DOCKERFILE = "Dockerfile-export"
+TARGET_NAME = "workbook.zip"
+REMOTE_USER = "app"
+DEPLOY_HOSTS = %w[ once-store-app-101 once-store-app-102 ]
+DEPLOY_LOCATION = "/local/app/product_releases/"
+
+SSHKit::Backend::Netssh.configure do |ssh|
+  ssh.connection_timeout = 30
+  ssh.ssh_options = { user: REMOTE_USER }
+end
+
+def announcing(message)
+  puts "\n\e[1;36m#{message}\e[0m"
+  yield
+end
+
+announcing "Building..." do
+  on(:local) do
+    execute :docker, :build, "-t", IMAGE_NAME, "-f", DOCKERFILE, "."
+  end
+end
+
+announcing "Exporting..." do
+  on(:local) do
+    execute :docker, :run, "--name", IMAGE_NAME, IMAGE_NAME
+    execute :docker, :cp, "#{IMAGE_NAME}:/#{TARGET_NAME}", "tmp/#{TARGET_NAME}"
+    execute :docker, :rm, IMAGE_NAME
+  end
+end

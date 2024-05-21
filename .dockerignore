@@ -2,18 +2,14 @@
 
 # Ignore git directory.
 /.git/
-/.gitignore
+/.git*
 
 # Ignore bundler config.
 /.bundle
 
-# Ignore all environment files (except templates).
+# Ignore all environment files.
 /.env*
-!/.env*.erb
-
-# Ignore all default key files.
-/config/master.key
-/config/credentials/*.key
+!/.env.example
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -23,23 +19,37 @@
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
+!/tmp/pids/
 !/tmp/pids/.keep
 
 # Ignore storage (uploaded files in development and any SQLite databases).
 /storage/*
+!/storage/
 !/storage/.keep
-/tmp/storage/*
-!/tmp/storage/.keep
 
-# Ignore assets.
-/node_modules/
-/app/assets/builds/*
-!/app/assets/builds/.keep
-/public/assets
+# Ignore development credentials
+/config/credentials.yml.enc
 
-# Ignore CI service files.
-/.github
+# Ignore deployment files
+/config/deploy*.yml
+/bin/deploy
+/bin/deploy-*
+/bin/release
 
-# Ignore Docker-related files
-/.dockerignore
-/Dockerfile*
+# Ignore master.key (should be set in environment)
+/config/master.key
+
+# Dockerfiles with suffixes are used for deployments
+/Dockerfile-*
+
+# Ignore editor noise
+/.vscode
+
+# Ignore ignore
+.dockerignore
+
+# Don't include our README
+/README.md
+
+# Ignore some large fixtures that aren't needed in production
+/test/fixtures/files/*
