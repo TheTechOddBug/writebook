@@ -19,12 +19,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "new denied with incompatible browser" do
     get new_session_url, env: { "HTTP_USER_AGENT" => DISALLOWED_BROWSER }
-    assert_select "h1", message: /Your browser is not supported/
+    assert_select "svg", message: /Your browser is not supported/
   end
 
   test "new allowed with compatible browser" do
     get new_session_url, env: { "HTTP_USER_AGENT" => ALLOWED_BROWSER }
-    assert_select "h1", message: /Your browser is not supported/, count: 0
+    assert_select "svg", message: /Your browser is not supported/, count: 0
   end
 
   test "create with valid credentials" do
