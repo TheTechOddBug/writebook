@@ -33,6 +33,8 @@
       <strong><%= book.title %></strong>
     </div>
 
+    <%= link_to_first_leafable(@leaves) %>
+
     <% if book.editable? %>
       <%= link_to edit_book_path(book), class: "btn flex-item-justify-end" do %>
         <%= image_tag "settings.svg", aria: { hidden: true }, size: 24 %>
@@ -95,13 +97,13 @@
     <% end %>
 
     <label class="btn txt-medium">
-      <input type="radio" name="view" id="toc-list" value="list" checked="checked" data-toc-view-target="switch" data-toc-view-type-value="list" data-action="toc-view#saveViewPref">
+      <input type="radio" name="view" id="toc-list" value="list" data-toc-view-target="switch" data-toc-view-type-value="list" data-action="toc-view#saveViewPref">
       <%= image_tag "view-list.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">List view</span>
     </label>
 
     <label class="btn txt-medium flex-item-justify-start">
-      <input type="radio" name="view" id="toc-grid" value="grid" data-toc-view-target="switch" data-toc-view-type-value="grid" data-action="toc-view#saveViewPref">
+      <input type="radio" name="view" id="toc-grid" value="grid" checked="checked" data-toc-view-target="switch" data-toc-view-type-value="grid" data-action="toc-view#saveViewPref">
       <%= image_tag "view-grid.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">Page view</span>
     </label>

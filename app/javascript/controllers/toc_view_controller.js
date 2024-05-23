@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   #restoreViewPref(id) {
-    const viewType = readCookie(id) || "list"
+    const viewType = readCookie(id) || "grid"
     this.switchTargets.forEach(switchTarget => {
       switchTarget.checked = switchTarget.dataset.tocViewTypeValue === viewType
     }
