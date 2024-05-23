@@ -5,7 +5,7 @@
   }
 }
 
-.page--section {
+body:has(.page--section) {
   background-color: var(--color-subtle);
 }
 
