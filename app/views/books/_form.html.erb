@@ -21,11 +21,20 @@
     <% end %>
 
     <div class="flex flex-column gap full-width">
-      <h1 class="txt-xx-large margin-none">
-        <strong><%= form.text_field :title, required: true, autofocus: true, class: "input full-width", placeholder: "Title", autocomplete: "off" %></strong>
-      </h1>
-      <small class="txt-normal txt-large txt-tight-lines"><%= form.text_area :subtitle, class: "input full-width", placeholder: "Subtitle", autocomplete: "off" %></small>
-      <small class="txt-normal txt-large txt-tight-lines"><%= form.text_field :author, class: "input full-width", placeholder: "Author", autocomplete: "off" %></small>
+      <div class="flex align-center gap txt-medium">
+        <%= translation_button(:book_title) %>
+        <h1 class="txt-xx-large margin-none full-width">
+          <%= form.text_field :title, required: true, autofocus: true, class: "input", placeholder: "Book title", autocomplete: "off" %>
+        </h1>
+      </div>
+      <div class="flex align-center gap txt-medium">
+        <%= translation_button(:book_subtitle) %>
+        <small class="txt-normal txt-large txt-tight-lines full-width"><%= form.text_area :subtitle, class: "input", placeholder: "Subtitle", autocomplete: "off" %></small>
+      </div>
+      <div class="flex align-center gap txt-medium">
+        <%= translation_button(:book_author) %>
+        <small class="txt-normal txt-large txt-tight-lines full-width"><%= form.text_field :author, class: "input", placeholder: "Author", autocomplete: "off" %></small>
+      </div>
     </div>
   </div>
 
