@@ -30,6 +30,7 @@
 }
 
 .input--file {
+  border: 0;
   cursor: pointer;
   display: grid;
   inline-size: auto;
@@ -39,7 +40,15 @@
     grid-area: 1 / 1;
   }
 
+  img {
+    border-radius: 0.5em;
+  }
+
   input[type="file"] {
+    --input-border-color: var(--color-selected-dark);
+    --input-border-radius: 8px;
+    --input-border-size: 2px;
+
     block-size: 100%;
     font-size: 0;
     inline-size: 100%;
