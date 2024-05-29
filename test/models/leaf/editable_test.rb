@@ -10,6 +10,20 @@ class Leaf::EditableTest < ActiveSupport::TestCase
     assert_equal "This is _such_ a great handbook.", leaves(:welcome_page).edits.last.page.body.content
   end
 
+  test "changing a leaf title doesn't create a revision" do
+    assert_no_difference -> { Edit.count } do
+      leaves(:welcome_page).edit leaf_params: { title: "New title" }
+    end
+
+    assert_equal "New title", leaves(:welcome_page).title
+  end
+
+  test "changes that don't affect the leafable don't create a revision" do
+    assert_no_difference -> { Edit.count } do
+      leaves(:welcome_page).edit leafable_params: { body: pages(:welcome).body.content }
+    end
+  end
+
   test "editing a leafable with an attachment includes the attachments in the new version" do
     assert leaves(:reading_picture).picture.image.attached?
 

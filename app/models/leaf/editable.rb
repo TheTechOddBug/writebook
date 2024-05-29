@@ -9,12 +9,18 @@ module Leaf::Editable
 
   def edit(leafable_params: {}, leaf_params: {})
     transaction do
-      new_leafable = leafable.dup_with_attachments
-      new_leafable.assign_attributes leafable_params
-      new_leafable.save!
+      changes_to_leafable = leafable_params.select do |key, value|
+        leafable.attributes[key.to_s] != value
+      end
 
-      edits.revision.create!(leafable: leafable)
-      update! leaf_params.merge(leafable: new_leafable)
+      if changes_to_leafable.present?
+        new_leafable = leafable.dup_with_attachments
+        new_leafable.update!(leafable_params)
+        edits.revision.create!(leafable: leafable)
+        update! leaf_params.merge(leafable: new_leafable)
+      else
+        update! leaf_params
+      end
     end
   end
 
