@@ -1,6 +1,6 @@
 <div class="flex align-center gap-half pad-inline txt-medium--responsive">
   <strong class="overflow-ellipsis txt-medium--responsive"><%= user.name %></strong>
-  <hr class="flex-item-grow margin-none">
+  <hr class="flex-item-grow margin-none" aria-hidden="true">
 
   <% if user == Current.user %>
     <%= link_to edit_user_path(user), class: "btn btn--small flex-item-no-shrink" do %>
