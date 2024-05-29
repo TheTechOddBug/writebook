@@ -5,6 +5,6 @@ class PicturesController < LeafablesController
     end
 
     def leafable_params
-      params.require(:picture).permit(:image)
+      params.fetch(:picture, {}).permit(:image)
     end
 end

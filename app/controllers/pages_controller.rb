@@ -11,6 +11,6 @@ class PagesController < LeafablesController
     end
 
     def leafable_params
-      params.require(:page).permit(:body)
+      params.fetch(:page, {}).permit(:body)
     end
 end

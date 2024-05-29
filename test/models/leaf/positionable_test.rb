@@ -53,7 +53,7 @@ class Leaf::PositionableTest < ActiveSupport::TestCase
 
   test "the first item in the collection has the expected score" do
     books(:handbook).leaves.destroy_all
-    new_page = books(:handbook).press Page.new(title: "New Page"), title: "New Page"
+    new_page = books(:handbook).press Page.new(body: "New Page"), title: "New Page"
 
     assert_equal 1, new_page.position_score
   end
