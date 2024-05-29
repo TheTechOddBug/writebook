@@ -76,7 +76,7 @@
   font-size: clamp(0.5rem, 5cqi, 0.8rem);
   line-height: 1.4;
   margin-block-end: var(--block-space-half);
-  overflow: clip;
+  overflow: hidden;
   padding: 10cqi;
   position: relative;
   text-align: start;
