@@ -24,12 +24,6 @@
         display: block;
       }
     }
-
-    &:not(:has(#toc-list:checked)) {
-      .arrangement__item {
-        animation: fidget 500ms infinite;
-      }
-    }
   }
 }
 
