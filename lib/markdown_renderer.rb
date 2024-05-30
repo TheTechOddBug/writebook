@@ -9,6 +9,6 @@ class MarkdownRenderer < Redcarpet::Render::HTML
   end
 
   def image(url, title, alt_text)
-    %(<img src="#{url}" alt="#{alt_text}" title="#{title}" data-action="lightbox#open:prevent" data-lightbox-target="image" data-lightbox-url-value="#{url}?disposition=attachment" href="#{url}">)
+    %(<a title="#{title}" data-action="lightbox#open:prevent" data-lightbox-target="image" data-lightbox-url-value="#{url}?disposition=attachment" href="#{url}"><img src="#{url}" alt="#{alt_text}"></a>)
   end
 end
