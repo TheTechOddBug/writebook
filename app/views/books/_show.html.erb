@@ -25,7 +25,7 @@
     <% end %>
 
     <div class="breadcrumbs">
-      <% if book.editable? %>
+      <% if Current.user %>
         <%= link_to books_path do %>
           <%= image_tag "books.svg", aria: { label: "Books" }, size: 19, class: "colorize--black", alt: "Books" %>
         <% end %>
