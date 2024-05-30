@@ -80,7 +80,7 @@ export default class extends Controller {
       this.applyMoveMode(event)
     } else {
       this.#moveMode = true
-      this.#originalOrder = [ ...this.itemTargets ]
+      this.#saveOriginalOrder()
     }
 
     this.#renderSelection()
@@ -92,7 +92,6 @@ export default class extends Controller {
     event.preventDefault()
 
     this.#moveMode = false
-    this.#originalOrder = undefined
     this.#renderSelection()
     this.#submitMove()
   }
@@ -103,9 +102,8 @@ export default class extends Controller {
     event.preventDefault()
 
     if (this.#moveMode) {
-      this.listTarget.append(...this.#originalOrder)
+      this.#restoreOriginalOrder()
       this.#moveMode = false
-      this.#originalOrder = undefined
     }
 
     this.#resetSelection()
@@ -115,6 +113,8 @@ export default class extends Controller {
   // Actions - drag & drop
 
   dragStartCreate(event) {
+    this.#saveOriginalOrder()
+
     const entry = document.createElement("li")
     entry.id = NEW_ITEM_ID
     entry.innerHTML = "&nbsp;"
@@ -124,6 +124,7 @@ export default class extends Controller {
     event.dataTransfer.effectAllowed = "move"
     event.dataTransfer.setData(NEW_ITEM_DATA_TYPE, event.params.url)
 
+    this.#wasDropped = false
     this.#dragItem = entry
     this.#setSelection(entry, false)
 
@@ -131,9 +132,12 @@ export default class extends Controller {
     this.#enableDraggingLayer()
   }
 
-  dragEndCreate(event) {
+  dragEndCreate() {
     if (!this.#wasDropped) {
       this.#dragItem.remove()
+      this.#restoreOriginalOrder()
+      this.#selection = undefined
+      this.#renderSelection()
     }
 
     this.containerTarget.classList.remove(this.addingModeClass)
@@ -143,7 +147,7 @@ export default class extends Controller {
   dragStart(event) {
     this.#wasDropped = false
     this.#dragItem = event.target
-    this.#originalOrder = [ ...this.itemTargets ]
+    this.#restoreOriginalOrder()
 
     if (!this.#targetIsSelected(event.target)) {
       this.#setSelection(event.target, false)
@@ -170,10 +174,9 @@ export default class extends Controller {
 
   dragEnd() {
     if (!this.#wasDropped) {
-      this.listTarget.append(...this.#originalOrder)
+      this.#restoreOriginalOrder()
       this.#selection = undefined
       this.#renderSelection()
-      this.#originalOrder = undefined
     }
 
     this.#disableDraggingLayer()
@@ -187,7 +190,7 @@ export default class extends Controller {
       const selectionRect = this.#selectedItems[isBefore ? 0 : this.#selectionSize - 1].getBoundingClientRect()
       const sameRow = rect.top === selectionRect.top
 
-      const mid = sameRow ? rect.left + rect.width / 2.0 :  rect.top + rect.height / 2.0
+      const mid = sameRow ? rect.left + rect.width / 2.0 : rect.top + rect.height / 2.0
       const ref = sameRow ? event.clientX : event.clientY
 
       if (ref < mid && !isBefore) {
@@ -364,6 +367,15 @@ export default class extends Controller {
     body.append("position", position)
 
     post(url, { body, responseKind: "turbo-stream" })
+  }
+
+  #saveOriginalOrder() {
+    this.#originalOrder = [ ...this.itemTargets ]
+  }
+
+  #restoreOriginalOrder() {
+    this.listTarget.append(...this.#originalOrder)
+    this.#originalOrder = undefined
   }
 
   get #selectionStart() {
