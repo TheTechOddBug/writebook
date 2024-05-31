@@ -1,0 +1,9 @@
+<% content_for :footer do %>
+  <span class="flex justify-start">
+    <%= render "leaves/delete", leaf: leaf %>
+
+    <span class="flex-item-justify-end flex-item-grow">
+      <%= link_to_next_leafable(leaf, hotkey: false, for_edit: true) %>
+    <span>
+  </span>
+<% end %>

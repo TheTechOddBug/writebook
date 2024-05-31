@@ -18,6 +18,8 @@
       <%= image_tag "check.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">Save</span>
     </button>
+
+    <%= editing_mode_toggle_switch(leaf: @leaf) %>
   </nav>
 <% end %>
 
@@ -25,12 +27,4 @@
   <%= render "pictures/form", book: @book, picture: @picture %>
 </div>
 
-<% content_for :footer do %>
-  <span class="flex justify-start">
-    <%= render "leaves/delete", leaf: @leaf %>
-
-    <span class="flex-item-justify-end flex-item-grow">
-      <%= link_to_next_leafable(@leaf, hotkey: false) %>
-    <span>
-  </span>
-<% end %>
+<%= render "leaves/edit_footer", leaf: @leaf %>

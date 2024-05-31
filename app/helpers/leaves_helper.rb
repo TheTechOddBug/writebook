@@ -6,12 +6,4 @@ module LeavesHelper
       reading_tracker_leaf_id_value: leaf.id
     }, **options, &block
   end
-
-  def show_or_edit_leafable_path(leaf)
-    if leaf.book.editable?
-      edit_leafable_path(leaf)
-    else
-      leafable_path(leaf)
-    end
-  end
 end

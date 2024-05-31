@@ -1,0 +1,7 @@
+<%= tag.div data: { controller: "edit-mode", edit_mode_edit_url_value: edit_url, edit_mode_read_url_value: read_url } do %>
+  <label class="switch txt-medium">
+    <%= check_box_tag :edit_mode_enabled, class: "switch__input", data: { edit_mode_target: "switch", action: "edit-mode#change" } %>
+    <span class="switch__btn round"></span>
+    <span class="for-screen-reader">Editing mode</span>
+  </label>
+<% end %>

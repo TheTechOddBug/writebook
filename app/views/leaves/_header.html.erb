@@ -19,5 +19,7 @@
       <%= image_tag "pencil.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">Edit</span>
     <% end %>
+
+    <%= editing_mode_toggle_switch(leaf: leaf) %>
   <% end %>
 <% end %>

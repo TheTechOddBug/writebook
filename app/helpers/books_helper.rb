@@ -32,9 +32,10 @@ module BooksHelper
     end
   end
 
-  def link_to_previous_leafable(leaf, hotkey: true)
+  def link_to_previous_leafable(leaf, hotkey: true, for_edit: false)
     if previous_leaf = leaf.previous
-      link_to leaf.book.editable? ? edit_leafable_path(previous_leaf) : leafable_path(previous_leaf), data: hotkey_data_attributes("left", enabled: hotkey), class: "btn flex-item-justify-start" do
+      path = for_edit ? edit_leafable_path(previous_leaf) : leafable_path(previous_leaf)
+      link_to path, data: hotkey_data_attributes("left", enabled: hotkey), class: "btn flex-item-justify-start" do
         image_tag("arrow-left.svg", aria: { hidden: true }, size: 24) + tag.span(previous_leaf.title, class: "for-screen-reader")
       end
     else
@@ -44,9 +45,10 @@ module BooksHelper
     end
   end
 
-  def link_to_next_leafable(leaf, hotkey: true)
+  def link_to_next_leafable(leaf, hotkey: true, for_edit: false)
     if next_leaf = leaf.next
-      link_to leaf.book.editable? ? edit_leafable_path(next_leaf) : leafable_path(next_leaf), data: hotkey_data_attributes("right", enabled: hotkey), class: "txt-ink txt-medium txt-undecorated flex align-center gap full-width flex-item-grow min-width justify-end flex-item-justify-end" do
+      path = for_edit ? edit_leafable_path(next_leaf) : leafable_path(next_leaf)
+      link_to path, data: hotkey_data_attributes("right", enabled: hotkey), class: "txt-ink txt-medium txt-undecorated flex align-center gap full-width flex-item-grow min-width justify-end flex-item-justify-end" do
         tag.span(next_leaf.title, class: "overflow-ellipsis") +
         tag.span(class: "btn txt-medium") do
           image_tag("arrow-right.svg", aria: { hidden: true }, size: 24) + tag.span("Next", class: "for-screen-reader")
