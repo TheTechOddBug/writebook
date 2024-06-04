@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import { FetchRequest } from "@rails/request.js"
 
-const AUTOSAVE_INTERVAL = 5000
+const AUTOSAVE_INTERVAL = 3000
 
 export default class extends Controller {
   static classes = [ "dirty", "saving" ]
