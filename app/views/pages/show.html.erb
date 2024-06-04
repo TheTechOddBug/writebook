@@ -8,8 +8,6 @@
   <%= @page.body.to_html %>
 </div>
 
-<%= render "leaves/history", leaf: @leaf if @book.editable? %>
-
 <% content_for :footer do %>
   <%= render "leaves/navigation", leaf: @leaf %>
 <% end %>
