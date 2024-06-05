@@ -20,7 +20,7 @@ module ActionText
     belongs_to :record, polymorphic: true, touch: true
 
     def to_html
-      renderer.render(content).html_safe
+      (renderer.try(:call) || renderer).render(content).html_safe
     end
   end
 end
