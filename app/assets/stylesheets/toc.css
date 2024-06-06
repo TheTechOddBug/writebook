@@ -28,14 +28,13 @@
 }
 
 .toc__leaf {
+  border: solid 2px transparent;
   color: var(--color-ink);
   container-type: inline-size;
   display: flex;
   flex-direction: column;
   margin: 0;
   text-align: center;
-
-  border: solid 2px transparent;
 
   .toc__container:where(:has(#toc-list:checked)) & {
     align-items: center;
@@ -179,7 +178,7 @@
 }
 
 .toc__wordcount {
-  display: flex-inline;
+  display: inline-flex;
 
   .toc__container:where(:has(#toc-list:checked)) & {
     font-size: 0.8em;
