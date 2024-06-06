@@ -128,12 +128,6 @@
   }
 }
 
-.btn--action {
-  --btn-background: var(--color-link);
-  --btn-color: var(--color-ink-reversed);
-  --outline-color: var(--color-link);
-}
-
 .btn--negative {
   --btn-background: var(--color-negative);
   --btn-color: var(--color-ink-reversed);
@@ -152,7 +146,7 @@
   --outline-color: var(--color-ink);
 }
 
-:is(.btn--action, .btn--negative, .btn--positive, .btn--reversed) {
+:is(.btn--negative, .btn--positive, .btn--reversed) {
   --btn-border-color: var(--color-bg);
 
   img {
