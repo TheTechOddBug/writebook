@@ -12,7 +12,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Current.user.books.editable.create! book_params
+    book = Book.create! book_params
     update_accesses(book)
 
     redirect_to book
@@ -53,11 +53,14 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :subtitle, :author, :cover, :remove_cover)
+      params.require(:book).permit(:title, :subtitle, :author, :cover, :remove_cover, :everyone_access)
     end
 
     def update_accesses(book)
-      book.update_accesses(Array(params[:reader_ids]), Array(params[:editor_ids]), excluding: Current.user)
+      editors = [ Current.user.id, *params[:editor_ids]&.map(&:to_i) ]
+      readers = [ Current.user.id, *params[:reader_ids]&.map(&:to_i) ]
+
+      book.update_access(editors: editors, readers: readers)
     end
 
     def remove_cover

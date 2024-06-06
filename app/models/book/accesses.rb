@@ -3,6 +3,7 @@ module Book::Accesses
 
   included do
     has_many :accesses, dependent: :destroy
+    scope :with_everyone_access, -> { where(everyone_access: true) }
   end
 
   def accessable?(user: Current.user)
@@ -17,18 +18,16 @@ module Book::Accesses
     accesses.find_by(user: user)
   end
 
-  def update_accesses(reader_ids, editor_ids, excluding:)
-    update_access_levels(reader_ids, :reader)
-    update_access_levels(editor_ids, :editor)
+  def update_access(editors:, readers:)
+    editors = Set.new(editors)
+    readers = Set.new(everyone_access? ? User.active.ids : readers)
 
-    exclude_ids = Array(excluding).map(&:id)
-    accesses.where.not(user_id: reader_ids + editor_ids + exclude_ids).delete_all
+    all = editors + readers
+    all_accesses = all.collect { |user_id|
+      { user_id: user_id, level: editors.include?(user_id) ? :editor : :reader }
+    }
+
+    accesses.upsert_all(all_accesses, unique_by: [ :book_id, :user_id ])
+    accesses.where.not(user_id: all).delete_all
   end
-
-  private
-    def update_access_levels(user_ids, level)
-      user_ids.each do |user_id|
-        accesses.find_or_initialize_by(user_id: user_id).update! level: level
-      end
-    end
 end

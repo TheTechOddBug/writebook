@@ -48,8 +48,8 @@
 
       <hr class="flex-item-grow margin-none" aria-hidden="true" style="--border-style: dashed">
 
-      <label for="everyone_reads" class="switch">
-        <input type="checkbox" id="everyone_reads" class="switch__input book-access__switch" checked="checked">
+      <label for="book_everyone_access" class="switch">
+        <%= form.check_box :everyone_access, class: "switch__input book-access__switch" %>
         <span class="switch__btn"></span>
         <span class="for-screen-reader">Only allow some people to read this book</span>
       </label>

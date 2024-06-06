@@ -15,7 +15,7 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 
   test "create makes the current user an editor" do
     assert_difference -> { Book.count }, +1 do
-      post books_url, params: { book: { title: "New Book" } }
+      post books_url, params: { book: { title: "New Book", everyone_access: false } }
     end
 
     assert_redirected_to book_url(Book.last)
@@ -29,7 +29,7 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 
   test "create sets additional accesses" do
     assert_difference -> { Book.count }, +1 do
-      post books_url, params: { book: { title: "New Book" }, "editor_ids[]": users(:jz).id, "reader_ids[]": users(:jason).id }
+      post books_url, params: { book: { title: "New Book", everyone_access: false }, "editor_ids[]": users(:jz).id, "reader_ids[]": users(:jason).id }
     end
 
     book = Book.last

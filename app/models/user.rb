@@ -5,11 +5,9 @@ class User < ApplicationRecord
   has_secure_password validations: false
 
   has_many :accesses, dependent: :destroy
-  has_many :books, through: :accesses do
-    def editable
-      merge(Access.editor)
-    end
-  end
+  has_many :books, through: :accesses
+
+  after_create :grant_access_to_everyone_books
 
   scope :active, -> { where(active: true) }
   scope :ordered, -> { order(:name) }
@@ -28,5 +26,10 @@ class User < ApplicationRecord
   private
     def deactived_email_address
       email_address&.gsub(/@/, "-deactivated-#{SecureRandom.uuid}@")
+    end
+
+    def grant_access_to_everyone_books
+      all_accesses = Book.with_everyone_access.ids.collect { |id| { book_id: id, level: :reader } }
+      accesses.insert_all(all_accesses)
     end
 end
