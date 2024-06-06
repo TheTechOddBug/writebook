@@ -2,7 +2,6 @@
   --gap: clamp(var(--inline-space), 2cqi, calc(var(--inline-space) * 3));
   --hover-size: 0;
 
-  container-type: inline-size;
   display: grid;
   gap: var(--block-space) var(--gap);
   grid-template-columns: repeat(auto-fit, minmax(max(150px, 14cqi), 1fr));
