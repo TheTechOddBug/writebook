@@ -133,6 +133,11 @@
   --outline-color: var(--color-negative);
 }
 
+.btn--placeholder {
+  pointer-events: none;
+  visibility: hidden;
+}
+
 .btn--positive {
   --btn-background: var(--color-positive);
   --btn-color: var(--color-ink-reversed);
