@@ -53,7 +53,7 @@ module BooksHelper
       end
     else
       link_to Current.user ? book_path(leaf.book) : public_book_path(leaf.book.slug), data: hotkey_data_attributes("right", enabled: hotkey), class: "btn txt-medium" do
-        image_tag("arrow-right.svg", aria: { hidden: true }, size: 24) + tag.span("End", class: "for-screen-reader")
+        tag.span(leaf.book.title, class: "overflow-ellipsis") + image_tag("arrow-reverse.svg", aria: { hidden: true }, size: 24)
       end
     end
   end
