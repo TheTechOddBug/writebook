@@ -150,6 +150,11 @@
   --outline-color: var(--color-ink);
 }
 
+.btn--transparent {
+  --btn-background: transparent;
+  --btn-border-color: transparent;
+}
+
 :is(.btn--link, .btn--negative, .btn--positive, .btn--reversed) {
   --btn-border-color: var(--color-bg);
 
