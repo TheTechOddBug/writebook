@@ -182,6 +182,8 @@
 }
 
 .toc__wordcount {
+  white-space: nowrap;
+
   .toc__container:where(:has(#toc-list:checked)) & {
     font-size: 0.8em;
   }
