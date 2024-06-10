@@ -19,6 +19,7 @@ class ActionText::Markdown::UploadsController < ApplicationController
 
   def show
     @attachment = ActiveStorage::Attachment.find_by! slug: "#{params[:slug]}.#{params[:format]}"
+    expires_in 1.year, public: true
     redirect_to @attachment.url
   end
 end
