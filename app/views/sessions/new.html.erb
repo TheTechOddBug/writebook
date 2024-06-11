@@ -1,8 +1,8 @@
 <% content_for(:title) { "Sign in" } %>
 <% turbo_page_requires_reload %>
 
-<div class="panel borderless shadow center margin-block-double <%= "shake" if flash[:alert] %>">
-  <%= image_tag "books.svg", class: "center margin-block-end-double pad", size: 130 %>
+<div class="panel shadow center margin-block-double <%= "shake" if flash[:alert] %>">
+  <%= image_tag "books.svg", class: "center margin-block-end-double pad colorize--black", size: 130 %>
 
   <%= form_with url: session_url, class: "flex flex-column gap" do |form| %>
     <div class="flex align-center gap">
