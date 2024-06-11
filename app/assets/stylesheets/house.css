@@ -44,35 +44,37 @@
   }
 }
 
-/* Base styles */
-a:not([class]) {
-  color: var(--house-color-link);
-  text-decoration-skip-ink: auto;
-}
-
-:where(a, button, input, textarea) {
-  --outline-size: max(2px, 0.08em);
-  --outline-style: solid;
-  --house-outline-color: currentColor;
-
-  caret-color: var(--house-color-link);
-
-  &:focus {
-    outline: var(--outline-size) var(--outline-style) var(--house-outline-color);
-    outline-offset: var(--outline-offset, var(--outline-size));
+:where(house-md) {
+  /* Base styles */
+  a:not([class]) {
+    color: var(--house-color-link);
+    text-decoration-skip-ink: auto;
   }
 
-  &:focus-visible {
-    outline: var(--outline-size) var(--outline-style) var(--house-outline-color);
-    outline-offset: var(--outline-offset, var(--outline-size));
-  }
+  :where(a, button, input, textarea) {
+    --outline-size: max(2px, 0.08em);
+    --outline-style: solid;
+    --house-outline-color: currentColor;
 
-  &:focus:not(:focus-visible) {
-    outline: none;
-  }
+    caret-color: var(--house-color-link);
 
-  ::selection {
-    background-color: var(--house-color-selected);
+    &:focus {
+      outline: var(--outline-size) var(--outline-style) var(--house-outline-color);
+      outline-offset: var(--outline-offset, var(--outline-size));
+    }
+
+    &:focus-visible {
+      outline: var(--outline-size) var(--outline-style) var(--house-outline-color);
+      outline-offset: var(--outline-offset, var(--outline-size));
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    ::selection {
+      background-color: var(--house-color-selected);
+    }
   }
 }
 
