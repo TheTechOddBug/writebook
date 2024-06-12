@@ -2,7 +2,7 @@
 
 <%= render "leaves/header", book: @book, leaf: @leaf %>
 
-<div class="page--section <%= "theme--dark" @section.theme == "dark" %>">
+<div class="page--section <%= "theme--dark" if @section.theme == "dark" %>">
   <h1><%= @section.title %></h1>
 </div>
 
