@@ -104,15 +104,11 @@
     }
   }
 
-body:not(:has(#edit_mode_enabled)) .hide_from_reading_mode {
+body.edit-mode .hide_from_edit_mode {
   display: none;
 }
 
-body:has(#edit_mode_enabled:not(:checked)) .hide_from_reading_mode {
-  display: none;
-}
-
-body:has(#edit_mode_enabled:checked) .hide_from_edit_mode {
+body:not(.edit-mode) .hide_from_reading_mode {
   display: none;
 }
 

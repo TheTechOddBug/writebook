@@ -20,7 +20,7 @@
 <% content_for :toolbar do %>
   <% if book.editable? %>
     <div class="page-toolbar fill-shade">
-      <%= editing_mode_toggle_switch(leaf: leaf) %>
+      <%= editing_mode_toggle_switch(@leaf, checked: false) %>
     </div>
   <% end %>
 <% end %>

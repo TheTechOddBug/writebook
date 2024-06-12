@@ -23,7 +23,7 @@
 
 <% content_for :toolbar do %>
   <div class="page-toolbar fill-selected gap margin-block-end-double">
-    <%= editing_mode_toggle_switch(leaf: @leaf) %>
+    <%= editing_mode_toggle_switch(@leaf, checked: true) %>
 
     <span class="separator margin-inline-half" aria-hidden="true"></span>
 

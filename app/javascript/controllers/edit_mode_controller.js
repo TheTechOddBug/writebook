@@ -2,22 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 import { readCookie, setCookie } from "helpers/cookie_helpers"
 
 export default class extends Controller {
-  static values = { editUrl: String, readUrl: String }
-  static targets = [ "switch" ]
+  static values = { targetUrl: String }
+  static classes = [ "editing" ]
 
   connect() {
-    this.switchTarget.checked = this.#savedCheckedState
+    document.body.classList.toggle(this.editingClass, this.#savedCheckedState)
   }
 
   change({ target: { checked } }) {
     setCookie("edit_mode", checked)
-
-    if (checked && this.editUrlValue) {
-      Turbo.visit(this.editUrlValue)
-    }
-    if (!checked && this.readUrlValue) {
-      Turbo.visit(this.readUrlValue)
-    }
+    Turbo.visit(this.targetUrlValue)
   }
 
   get #savedCheckedState() {
