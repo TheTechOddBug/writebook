@@ -34,6 +34,11 @@ body {
     padding-inline: var(--inline-space);
     view-transition-name: footer-nav;
   }
+
+  &:has(.new-book-btn) {
+    inset-block-end: 0;
+    position: sticky;
+  }
 }
 
 :where(#header) {
