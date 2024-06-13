@@ -7,7 +7,8 @@
   padding: 0;
 }
 
-:has(.page--section.theme--dark) {
+:has(#section_theme[value=dark]:checked),
+:not(:has(#section_theme[value=dark])):has(.page--section.theme--dark) {
   --lch-black: 100% 0 0;
   --lch-white: 0% 0 0;
   --lch-gray-light: 25.2% 0 0;
