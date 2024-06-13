@@ -5,6 +5,6 @@ class SectionsController < LeafablesController
     end
 
     def leafable_params
-      {}
+      params.fetch(:section, {}).permit(:theme)
     end
 end

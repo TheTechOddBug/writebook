@@ -7,7 +7,7 @@
 
     <%= render "leaves/delete", leaf: leaf %>
 
-    <div class="toc__thumbnail">
+    <div class="toc__thumbnail <%= "toc__thumbnail--dark" if leaf.leafable.is_a?(Section) && leaf.leafable.theme == "dark" %>">
       <%= link_to edit_leafable_path(leaf), class: "toc__link hide_from_reading_mode", data: { turbo_frame: "_top" } do %>
         <span class="for-screen-reader">Edit <%= leaf.title %></span>
       <% end %>

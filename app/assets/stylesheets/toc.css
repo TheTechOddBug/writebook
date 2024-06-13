@@ -119,6 +119,11 @@
   .heading__link {
     display: none;
   }
+
+  &.toc__thumbnail--dark {
+    background-color: var(--color-ink);
+    color: var(--color-ink-reversed);
+  }
 }
 
 .toc__title {

@@ -120,6 +120,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_12_101314) do
   create_table "sections", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "theme"
   end
 
   create_table "sessions", force: :cascade do |t|
