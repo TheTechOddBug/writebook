@@ -23,7 +23,7 @@
     <%= turbo_frame_tag :previous_version do %>
       <header class="flex align-center justify-center gap">
         <% if @edit.previous %>
-          <%= link_to page_edit_path(@leaf, @edit.previous), class: "btn btn--reversed txt-small" do %>
+          <%= link_to page_edit_path(@leaf, @edit.previous), data: { turbo_action: :advance }, class: "btn btn--reversed txt-small" do %>
             <%= image_tag "arrow-left.svg", aria: { hidden: true }, size: 24 %>
             <span class="for-screen-reader">Previous version</span>
           <% end %>
@@ -39,7 +39,7 @@
         </h2>
 
         <% if @edit.next %>
-          <%= link_to page_edit_path(@leaf, @edit.next), class: "btn btn--reversed txt-small" do %>
+          <%= link_to page_edit_path(@leaf, @edit.next), data: { turbo_action: :advance }, class: "btn btn--reversed txt-small" do %>
             <%= image_tag "arrow-right.svg", aria: { hidden: true }, size: 24 %>
             <span class="for-screen-reader">Next version</span>
           <% end %>
