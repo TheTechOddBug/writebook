@@ -53,6 +53,10 @@
 .book__nav {
   font-size: var(--font-medium-responsive);
   margin: var(--block-space-double) auto var(--block-space);
+
+  .btn {
+    max-inline-size: 50ch;
+  }
 }
 
 .book__sidebar {
