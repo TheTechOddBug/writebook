@@ -1,4 +1,4 @@
-module Book::Accesses
+module Book::Accessable
   extend ActiveSupport::Concern
 
   included do

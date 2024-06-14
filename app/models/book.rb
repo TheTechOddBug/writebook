@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  include Accesses, Sluggable
+  include Accessable, Sluggable
 
   has_many :leaves, dependent: :destroy
   has_one_attached :cover, dependent: :purge_later
