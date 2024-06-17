@@ -1,7 +1,7 @@
 class FirstRunsController < ApplicationController
   allow_unauthenticated_access
 
-  before_action :prevent_repeats
+  before_action :prevent_running_after_setup
 
   def show
     @user = User.new
@@ -15,7 +15,7 @@ class FirstRunsController < ApplicationController
   end
 
   private
-    def prevent_repeats
+    def prevent_running_after_setup
       redirect_to root_url if User.any?
     end
 
