@@ -42,3 +42,11 @@ announcing "Exporting..." do
     execute :docker, :rm, IMAGE_NAME
   end
 end
+
+announcing "Uploading..." do
+  on(DEPLOY_HOSTS) do
+    within DEPLOY_LOCATION do
+      upload! "tmp/#{TARGET_NAME}", TARGET_NAME
+    end
+  end
+end
