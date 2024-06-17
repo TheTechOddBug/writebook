@@ -25,7 +25,7 @@ class FirstRunTest < ActiveSupport::TestCase
 
     book = Book.first
 
-    assert book.accessable?(user: User.first)
+    assert book.editable?(user: User.first)
     assert book.cover.attached?
     assert book.leaves.any?
   end

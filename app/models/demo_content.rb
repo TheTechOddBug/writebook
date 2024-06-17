@@ -3,7 +3,7 @@ class DemoContent
     def create_manual(user)
       book = Book.create(title: "The Writebook Manual", everyone_access: true)
       book.cover.attach(load_attachement("writebook-manual-cover.png"))
-      book.update_access(readers: [], editors: [])
+      book.update_access(readers: [], editors: [ user.id ])
 
       book.press demo_section, title: "Chapter 1"
       book.press demo_page, title: "My first page"
