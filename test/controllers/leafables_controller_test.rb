@@ -7,7 +7,7 @@ class LeafablesControllerTest < ActionDispatch::IntegrationTest
 
   test "create" do
     assert_changes -> { books(:handbook).leaves.count }, +1 do
-      post book_pages_path(books(:handbook)), params: {
+      post book_pages_path(books(:handbook), format: :turbo_stream), params: {
         leaf: { title: "Another page" }, page: { body: "With interesting words." }
       }
     end
@@ -19,7 +19,7 @@ class LeafablesControllerTest < ActionDispatch::IntegrationTest
     books(:handbook).access_for(user: users(:kevin)).update! level: :reader
 
     assert_no_changes -> { books(:handbook).leaves.count } do
-      post book_pages_path(books(:handbook)), params: {
+      post book_pages_path(books(:handbook), format: :turbo_stream), params: {
         leaf: { title: "Another page" }, page: { body: "With interesting words." }
       }
     end
