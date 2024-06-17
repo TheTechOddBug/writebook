@@ -1,5 +1,5 @@
 class ActionText::Markdown::UploadsController < ApplicationController
-  skip_before_action :require_authentication, only: :show
+  allow_unauthenticated_access only: :show
 
   before_action do
     ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
