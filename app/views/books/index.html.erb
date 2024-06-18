@@ -24,7 +24,9 @@
   </nav>
 <% end %>
 
-<div class="library">
-  <%= render @books %>
-  <%= render "books/new" if Current.user %>
-</div>
+<% cache [ @books, signed_in? ] do %>
+  <div class="library">
+    <%= render @books %>
+    <%= render "books/new" if signed_in? %>
+  </div>
+<% end %>
