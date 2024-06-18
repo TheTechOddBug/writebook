@@ -166,17 +166,15 @@ export default class extends Controller {
   }
 
   drop(event) {
-    if (!this.#arrangeMode) {
-      return
-    }
-
     this.#wasDropped = true
 
     const createURL = event.dataTransfer.getData(NEW_ITEM_DATA_TYPE)
     if (createURL) {
       this.#submitCreate(createURL)
     } else {
-      this.#submitMove()
+      if (this.#arrangeMode) {
+        this.#submitMove()
+      }
     }
   }
 
