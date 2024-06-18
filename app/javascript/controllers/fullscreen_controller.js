@@ -5,7 +5,7 @@ export default class extends Controller {
 
   connect() {
     if (!this.element.requestFullscreen) {
-      this.buttonTarget.style.visibility = "hidden"
+      this.buttonTarget.style.display = "none"
     }
   }
 

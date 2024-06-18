@@ -96,13 +96,14 @@
   color: currentColor;
   display: inline-flex;
   font-size: inherit;
-  padding: 0.2em;
+  gap: 0.1em;
+  padding: 0;
 
   button, label {
-    aspect-ratio: 4/3;
+    aspect-ratio: 6/5;
     appearance: none;
     background-color: transparent;
-    block-size: 2em;
+    min-block-size: 2em;
     border: none;
     border-radius: 0.5em;
     color: currentColor;
@@ -113,11 +114,12 @@
     place-items: center;
     transition: background-color 300ms ease;
 
+    img,
     svg {
       -webkit-touch-callout: none;
-      block-size: 0.9em;
+      block-size: 1em;
       fill: currentColor;
-      grid-area: 1/1;
+      grid-area: 1 / 1;
       inline-size: auto;
       user-select: none;
     }

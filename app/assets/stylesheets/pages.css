@@ -86,6 +86,7 @@
   }
 
   .separator {
+    block-size: 100%;
     border-color: var(--color-bg);
     border-width: 3px;
     margin-block: calc(-1 * var(--padding-block));

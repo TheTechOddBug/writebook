@@ -67,6 +67,7 @@ body {
   inset: 0 0 auto;
   justify-content: center;
   min-width: 0;
+  overflow: hidden;
   padding-inline: var(--inline-space);
   position: sticky;
   view-transition-name: toolbar;
