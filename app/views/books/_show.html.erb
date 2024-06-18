@@ -70,7 +70,19 @@
       <span class="txt-large--responsive txt-normal"><%= book.author %></span>
     </h1>
 
-    <div class="book__toolbar fill-white flex gap-half pad-block margin-block-end-half <%= "position-sticky" if book.editable? %>" data-controller="toc-view" data-toc-view-id-value="<%= dom_id(book) %>">
+    <div class="book__toolbar fill-white flex gap-half pad-block margin-block-end-half justify-center <%= "position-sticky" if book.editable? %>" data-controller="toc-view" data-toc-view-id-value="<%= dom_id(book) %>">
+      <label class="btn txt-medium">
+        <input type="radio" name="view" id="toc-list" value="list" data-toc-view-target="switch" data-toc-view-type-value="list" data-action="toc-view#saveViewPref">
+        <%= image_tag "view-list.svg", aria: { hidden: true }, size: 24 %>
+        <span class="for-screen-reader">List view</span>
+      </label>
+
+      <label class="btn txt-medium flex-item-justify-start">
+        <input type="radio" name="view" id="toc-grid" value="grid" checked="checked" data-toc-view-target="switch" data-toc-view-type-value="grid" data-action="toc-view#saveViewPref">
+        <%= image_tag "view-grid.svg", aria: { hidden: true }, size: 24 %>
+        <span class="for-screen-reader">Page view</span>
+      </label>
+
       <% if book.editable? %>
         <%= book_part_create_button book, Page do %>
           <svg viewBox="0 0 20 24" xmlns="http://www.w3.org/2000/svg" fill="var(--color-ink)">
@@ -94,7 +106,7 @@
           <span class="for-screen-reader">Add a new picture page</span>
         <% end %>
 
-        <%= book_part_create_button book, Section, form_class: "flex-item-justify-start" do %>
+        <%= book_part_create_button book, Section do %>
           <svg viewBox="0 0 20 24" xmlns="http://www.w3.org/2000/svg" fill="var(--color-ink)">
             <path d="m15 11.5c-3.6 0-6.5-2.9-6.5-6.5s0-.2 0-.2h-6.3c-.3 0-.4.2-.4.4v16.9s0 .2.2 0h13.4c.3 0 .4-.2.4-.4v-10.3c-.2 0-.5 0-.8 0z" opacity="0"/>
             <path d="m15.8 21.7c0 .3-.2.4-.4.4h-13.5-.2v-16.9c0-.3.2-.4.4-.4h6.3c0-.6.1-1.2.3-1.8h-6.9c-1 0-1.8.8-1.8 1.8v17.5c0 1 .8 1.8 1.8 1.8h14c.9 0 1.6-.6 1.8-1.4v-11.6c-.5.2-1.1.4-1.8.5v10.3z"/>
@@ -104,18 +116,6 @@
           <span class="for-screen-reader">Add a new section page</span>
         <% end %>
       <% end %>
-
-      <label class="btn txt-medium">
-        <input type="radio" name="view" id="toc-list" value="list" data-toc-view-target="switch" data-toc-view-type-value="list" data-action="toc-view#saveViewPref">
-        <%= image_tag "view-list.svg", aria: { hidden: true }, size: 24 %>
-        <span class="for-screen-reader">List view</span>
-      </label>
-
-      <label class="btn txt-medium flex-item-justify-start">
-        <input type="radio" name="view" id="toc-grid" value="grid" checked="checked" data-toc-view-target="switch" data-toc-view-type-value="grid" data-action="toc-view#saveViewPref">
-        <%= image_tag "view-grid.svg", aria: { hidden: true }, size: 24 %>
-        <span class="for-screen-reader">Page view</span>
-      </label>
 
       <% if book.editable? %>
         <label class="btn arrange-mode__button txt-medium flex-item-justify-end disable-when-deleting">
