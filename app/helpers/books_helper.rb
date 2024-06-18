@@ -32,7 +32,7 @@ module BooksHelper
 
   def link_to_first_leafable(leaves)
     if first_leaf = leaves.first
-      link_to leafable_path(first_leaf), data: hotkey_data_attributes("right"), class: "txt-ink txt-undecorated flex align-center gap full-width flex-item-grow min-width justify-start flex-item-justify-start", hidden: true do
+      link_to leafable_path(first_leaf), data: hotkey_data_attributes("right"), class: "txt-ink txt-undecorated flex align-center gap full-width flex-item-grow min-width justify-start flex-item-justify-start disable-when-arranging", hidden: true do
         tag.span(class: "btn") do
           image_tag("arrow-right.svg", aria: { hidden: true }, size: 24) + tag.span("Start reading", class: "for-screen-reader")
         end + tag.span(first_leaf.title, class: "overflow-ellipsis")
