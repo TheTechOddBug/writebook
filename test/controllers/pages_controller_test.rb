@@ -14,14 +14,15 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
 
   test "show with HTML content in the markdown" do
     get leafable_path(sample_page_leaf(%(<div id="test"><div style="text-align:center;">Hello</div></div>)))
+
     assert_select "#test", html: %(<div style="text-align:center;">Hello</div>)
   end
 
   test "show with tables in the markdown" do
     get leafable_path(sample_page_leaf(%(| name | food |\n| ---- | ---- |\n| Kevin | Pizza |)))
+
     assert_select "table th", text: "name"
     assert_select "table th", text: "food"
-
     assert_select "table td", text: "Kevin"
     assert_select "table td", text: "Pizza"
   end
