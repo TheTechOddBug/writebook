@@ -10,7 +10,7 @@
   </nav>
 <% end %>
 
-<div class="panel borderless margin-block-double shadow center <%= "shake" if flash[:alert] %>">
+<div class="panel margin-block-double shadow center <%= "shake" if flash[:alert] %>">
   <%= image_tag "app-icon-192.png", class: "product-logo center margin-block-end-double pad colorize--black border-radius", size: 130 %>
 
   <%= form_with model: @user, url: join_path(params[:join_code]), class: "flex flex-column gap" do |form| %>
