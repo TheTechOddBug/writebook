@@ -11,7 +11,7 @@ module Authentication
 
   class_methods do
     def require_unauthenticated_access(**options)
-      allow_unauthenticated_access
+      allow_unauthenticated_access **options
       before_action :redirect_signed_in_user_to_root, **options
     end
 
