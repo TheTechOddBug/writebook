@@ -87,8 +87,8 @@ hr {
   margin: 2lh auto;
 }
 
-strong {
-  font-weight: 600;
+b, strong {
+  font-weight: 700;
 }
 
 :is(pre, code, .pre, .code) {
