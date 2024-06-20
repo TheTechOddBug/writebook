@@ -1,6 +1,8 @@
-:where(house-md) {
+:root {
   --house-border-radius: 0.5em;
+}
 
+:where(house-md) {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
