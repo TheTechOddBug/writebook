@@ -7,4 +7,8 @@ module PagesHelper
   def page_title(leaf, book)
     [ leaf.title, book.title, book.author ].reject(&:blank?).to_sentence(two_words_connector: " · ", words_connector: " · ", last_word_connector: " · ")
   end
+
+  def sanitize_content(content)
+    sanitize content, scrubber: Rails::HTML::PermitScrubber.new
+  end
 end

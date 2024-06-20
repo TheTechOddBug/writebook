@@ -10,7 +10,7 @@
   </div>
 <% elsif @leaf.page? %>
   <div class="page--page">
-    <%= sanitize @leaf.page.body.to_html %>
+    <%= sanitize_content @leaf.page.body.to_html %>
   </div>
 <% elsif @leaf.picture? %>
   <div class="page--picture">
