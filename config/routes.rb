@@ -33,15 +33,15 @@ Rails.application.routes.draw do
     resources :pages
   end
 
-  get "/:id/:slug", to: "books#show"
-  get "/:book_id/:book_slug/:id/:slug", to: "leafables#show"
+  get "/:id/:slug", to: "books#show", constraints: { id: /\d+/ }, as: :slugged_book
+  get "/:book_id/:book_slug/:id/:slug", to: "leafables#show", constraints: { book_id: /\d+/, id: /\d+/ }, as: :slugged_leafable
 
   direct :book_slug do |book, options|
-    { controller: "books", action: "show", id: book, slug: book.slug }.merge(options)
+    route_for :slugged_book, book, book.slug, options
   end
 
   direct :leafable_slug do |leaf, options|
-    { controller: "leafables", action: "show", book_id: leaf.book, book_slug: leaf.book.slug, id: leaf, slug: leaf.slug }.merge(options)
+    route_for :slugged_leafable, leaf.book, leaf.book.slug, leaf, leaf.slug, options
   end
 
   resources :pages, only: [] do
