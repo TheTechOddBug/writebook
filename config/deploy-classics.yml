@@ -1,0 +1,5 @@
+image: registry.kevinmcconnell.dev/workbook
+host: once-writebook-classics-101
+tls_domain: classics.37signals.com
+ssh_user: app
+arch: linux/amd64
