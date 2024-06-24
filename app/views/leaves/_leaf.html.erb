@@ -22,7 +22,7 @@
         <% end %>
       <% end %>
 
-      <%= leaf.title if leaf.section? %>
+      <%= tag.span(simple_format(leaf.title), class: "txt-align-center") if leaf.section? %>
 
       <%= sanitize_content leaf.page.html_preview if leaf.page? %>
 
