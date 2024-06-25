@@ -100,7 +100,7 @@
   place-self: center;
 }
 
-  body:has(#page-editor.clean, #picture-editor.clean, #section-editor.clean) {
+  body:has(#leafable-editor.clean) {
     & .page-toolbar__save {
       --btn-background: var(--color-positive);
       --btn-border-color: var(--color-bg);
@@ -117,7 +117,7 @@
     }
   }
 
-  body:has(#page-editor.dirty, #picture-editor.dirty, #section-editor.dirty) {
+  body:has(#leafable-editor.dirty) {
     & .page-toolbar__save {
       --btn-background: var(--color-link);
       --btn-border-color: var(--color-bg);
@@ -134,7 +134,7 @@
     }
   }
 
-  body:has(#page-editor.saving, #picture-editor.saving, #section-editor.saving) .page-toolbar__save {
+  body:has(#leafable-editor.saving) .page-toolbar__save {
     position: relative;
 
     > * {

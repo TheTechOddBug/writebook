@@ -11,7 +11,7 @@ class LeafablesController < ApplicationController
   end
 
   def create
-    @leaf = @book.leaves.create! leaf_params.merge(leafable: new_leafable)
+    @leaf = @book.press new_leafable, leaf_params
     position_new_leaf @leaf
   end
 
