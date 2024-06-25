@@ -50,7 +50,7 @@
           <%= image_tag @book.cover, alt: "Cover for #{ @book.title }", class: "book__cover margin-block-none center" %>
         <% end %>
       <% else %>
-        <%= image_tag "default-cover.webp", alt: "Book cover", class: "book__cover margin-block-none center" %>
+        <%= image_tag "empty-cover.png", alt: "Book cover", class: "book__cover margin-block-none center" %>
       <% end %>
 
       <% if @book.editable? %>

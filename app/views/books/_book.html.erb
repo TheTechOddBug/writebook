@@ -2,7 +2,7 @@
   <figure class="library__book">
     <div class="flex flex-column gap-half">
       <div class="flex-inline position-relative center">
-        <%= image_tag book.cover.attached? ? book.cover : "default-cover.webp", alt: "Book cover", class: "book__cover" %>
+        <%= image_tag book.cover.attached? ? book.cover : "empty-cover.png", alt: "Book cover", class: "book__cover" %>
         <%= turbo_frame_tag dom_id(book, :bookmark), src: book_bookmark_path(book), target: "_top" %>
       </div>
       <h2 class="margin-none flex flex-column txt-normal txt-tight-lines txt-medium--responsive">

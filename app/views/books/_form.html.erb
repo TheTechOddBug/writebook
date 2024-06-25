@@ -1,6 +1,6 @@
 <%= form_with model: book, id: "book-editor" do |form| %>
   <div class="book__form flex align-center gap full-width" style="--input-padding: 0.5rem 1rem; --input-border-radius: 0.5rem">
-    <%= tag.div class: "flex flex-column", data: { controller: "upload-preview", upload_preview_default_image_value: asset_url("default-cover.webp") } do %>
+    <%= tag.div class: "flex flex-column", data: { controller: "upload-preview", upload_preview_default_image_value: asset_url("empty-cover.png") } do %>
       <label class="align-center center gap">
         <div class="input--file">
           <%= image_tag book.cover.attached? ? book.cover : "empty-cover.png", alt: "Book cover",
