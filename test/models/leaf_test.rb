@@ -5,4 +5,9 @@ class LeafTest < ActiveSupport::TestCase
     leaf = Leaf.new(title: "Hello, World!")
     assert_equal "hello-world", leaf.slug
   end
+
+  test "slug is never completely blank" do
+    leaf = Leaf.new(title: "")
+    assert_equal "-", leaf.slug
+  end
 end
