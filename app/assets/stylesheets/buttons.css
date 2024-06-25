@@ -51,6 +51,7 @@
   }
 
   /* Circle buttons */
+  &.btn--circle,
   &:where(:has(.for-screen-reader):has(img, svg)) {
     --btn-border-radius: 50%;
     --btn-padding: 0;
@@ -78,6 +79,10 @@
       margin: 0;
       padding: 0;
     }
+
+    img.checked {
+      display: none;
+    }
   }
 
   &:has(input:checked)  {
@@ -93,6 +98,10 @@
       img {
         filter: invert(0);
       }
+    }
+
+    img.checked {
+      display: block;
     }
   }
 

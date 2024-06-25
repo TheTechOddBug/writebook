@@ -1,5 +1,5 @@
 <% cache book do %>
-  <figure class="library__book">
+  <figure class="library__book <%= "theme--#{book&.theme}" unless book.cover.attached? %>">
     <div class="flex flex-column gap-half">
       <div class="flex-inline position-relative center">
         <%= image_tag book.cover.attached? ? book.cover : "empty-cover.png", alt: "Book cover", class: "book__cover" %>

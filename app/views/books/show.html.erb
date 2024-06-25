@@ -44,7 +44,7 @@
 
 <% cache [ @book, @book.editable? ] do %>
   <aside class="txt-align-center margin-block">
-    <div class="book__sidebar">
+    <div class="book__sidebar <%= "theme--#{@book&.theme}" unless @book.cover.attached? %>">
       <% if @book.cover.attached? %>
         <%= link_to rails_blob_path(@book.cover, disposition: "attachment", only_path: true), data: { action: "lightbox#open:prevent", lightbox_target: "image", lightbox_url_value: rails_blob_path(@book.cover, disposition: "attachment", only_path: true) } do %>
           <%= image_tag @book.cover, alt: "Cover for #{ @book.title }", class: "book__cover margin-block-none center" %>
