@@ -17,6 +17,7 @@
     --cover-height: 75dvh;
 
     grid-template-columns: 1fr;
+    padding-inline: var(--inline-space);
   }
 }
 

@@ -13,6 +13,10 @@ body {
   padding-inline: clamp(var(--inline-space), 5%, calc(var(--inline-space) * 3));
   text-align: center;
 
+  @media (max-width: 100ch) {
+    padding-inline: var(--inline-space);
+  }
+
   @media print {
     font-size: 11pt;
     inline-size: unset;
