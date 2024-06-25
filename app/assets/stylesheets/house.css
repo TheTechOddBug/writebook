@@ -22,32 +22,38 @@
 
   :is(button, label) {
     aspect-ratio: 6/5;
+    align-items: center;
     appearance: none;
     background-color: transparent;
     border: none;
     border-radius: var(--house-border-radius);
     cursor: pointer;
-    display: grid;
+    display: inline-flex;
     flex-shrink: 0;
     inline-size: auto;
+    justify-content: center;
     min-block-size: 2em;
-    place-items: center;
     transition: background-color 300ms ease;
 
     :is(img, svg) {
       -webkit-touch-callout: none;
       block-size: 1em;
       fill: currentColor;
-      grid-area: 1 / 1;
       inline-size: auto;
       user-select: none;
     }
 
-    &:is(:focus, :hover) {
+    &:where(:focus-visible) {
       background-color: var(--color-bg);
     }
 
-    &:is(:active) {
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-bg);
+      }
+    }
+
+    &:where(:active) {
       background-color: var(--color-selected-dark);
     }
   }
