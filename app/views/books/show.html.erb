@@ -54,7 +54,10 @@
           <%= image_tag @book.cover, alt: "Cover for #{ @book.title }", class: "book__cover margin-block-none center" %>
         <% end %>
       <% else %>
-        <%= image_tag "empty-cover.png", alt: "Book cover", class: "book__cover margin-block-none center" %>
+        <span class="book__cover-wrapper">
+          <%= image_tag "empty-cover.png", alt: "Book cover", class: "book__cover margin-block-none center" %>
+          <span class="book__title overflow-line-clamp pad txt-align-start txt-tight-lines"" style="--lines: 6" aria-hidden="true"><%= @book.title %></span>
+        </span>
       <% end %>
 
       <% if @book.editable? %>

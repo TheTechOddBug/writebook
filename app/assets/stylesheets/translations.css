@@ -13,7 +13,7 @@
   position: absolute;
   z-index: 1;
 
-  @media (max-width: 100ch) {
+  @media (max-width: 70ch) {
     max-inline-size: calc(var(--max-width) - var(--inline-space));
   }
 

@@ -13,7 +13,7 @@ body {
   padding-inline: clamp(var(--inline-space), 5%, calc(var(--inline-space) * 3));
   text-align: center;
 
-  @media (max-width: 100ch) {
+  @media (max-width: 70ch) {
     padding-inline: var(--inline-space);
   }
 

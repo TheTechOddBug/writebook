@@ -11,7 +11,7 @@
   padding: 0;
 
   &:has(turbo-frame > :last-child:nth-child(-n + 2)) {
-    @media (min-width: 100ch) {
+    @media (min-width: 70ch) {
       grid-template-columns: repeat(auto-fit, minmax(max(130px, 12cqi), 24cqi));
     }
   }

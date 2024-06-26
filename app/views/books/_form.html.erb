@@ -23,7 +23,7 @@
 
           <div class="input--file">
             <%= image_tag book.cover.attached? ? book.cover : "empty-cover.png", alt: "Book cover",
-                class: "book__cover margin-none", style: "--cover-height: 60dvh",
+                class: "book__cover margin-none", style: "--cover-height: 60vh",
                 data: { upload_preview_target: "image" } %>
             <%= form.file_field :cover, class: "input", accept: "image/png, image/jpeg, image/jpg, image/webp",
                 data: { upload_preview_target: "input", action: "upload-preview#previewImage" },

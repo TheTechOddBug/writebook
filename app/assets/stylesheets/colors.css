@@ -13,6 +13,7 @@
   --lch-green: 65.59% 0.234 142.49;
   --lch-green-light: 95% 0.03 142.49;
   --lch-always-black: 0% 0 0;
+  --lch-always-white: 100% 0 0;
 
   /* Abstractions */
   --color-negative: oklch(var(--lch-red));
@@ -29,6 +30,7 @@
   --color-selected-dark: oklch(var(--lch-blue-dark));
   --color-marker: oklch(var(--lch-orange));
   --color-always-black: oklch(var(--lch-always-black));
+  --color-always-white: oklch(var(--lch-always-white));
 
   /* Redefine named color values for dark mode */
   @media (prefers-color-scheme: dark) {

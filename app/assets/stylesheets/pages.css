@@ -176,7 +176,7 @@ body:not(.edit-mode) .hide_from_reading_mode {
 }
 
 .page-edit__current {
-  @media (max-width: 100ch) {
+  @media (max-width: 70ch) {
     display: none;
   }
 }
