@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   require_unauthenticated_access only: %i[ new create ]
 
   before_action :verify_join_code, only: %i[ new create ]
-  before_action :ensure_can_administer, only: %i[ update destroy ]
+  before_action :ensure_can_administer, only: :destroy
   before_action :set_user, only: %i[ show update edit destroy ]
-  before_action :ensure_current_user, only: :edit
+  before_action :ensure_current_user, only: %i[ edit update ]
 
 
   def index
