@@ -53,6 +53,36 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert users(:kevin).reload.administrator?
   end
 
+  test "update allows non-admin users to change their own settings" do
+    sign_in :kevin
+    assert_not users(:kevin).administrator?
+
+    put user_url(users(:kevin)), params: { user: { name: "Bob" } }
+
+    assert_redirected_to users_url
+    assert_equal "Bob", users(:kevin).reload.name
+  end
+
+  test "update does not allow non-admins to change roles" do
+    sign_in :kevin
+    assert_not users(:kevin).administrator?
+
+    put user_url(users(:kevin)), params: { user: { role: "administrator" } }
+
+    assert_redirected_to users_url
+    assert_not users(:kevin).reload.administrator?
+  end
+
+  test "update does not allow non-admins to change other user's settings" do
+    sign_in :kevin
+    assert_not users(:kevin).administrator?
+
+    put user_url(users(:david)), params: { user: { name: "Bob" } }
+
+    assert_response :forbidden
+    assert_equal "David", users(:david).reload.name
+  end
+
   test "destroy" do
     sign_in :david
 

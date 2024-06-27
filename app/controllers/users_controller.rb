@@ -30,11 +30,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    if Current.user.can_administer?
+    case
+    when Current.user.can_administer?
       @user.update(user_params.merge(role_params))
-    else
+    when @user.current?
       @user.update(user_params)
+    else
+      head :forbidden and return
     end
+
     redirect_to users_url
   end
 
