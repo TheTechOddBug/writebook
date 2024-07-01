@@ -97,6 +97,18 @@
   }
 }
 
+.btn--circle:has(#book_theme_white:checked) {
+  img.checked {
+    filter: invert(0);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    img.checked {
+      filter: invert(0);
+    }
+  }
+}
+
 .book__cover--add {
   inset: auto 50% calc(var(--block-space) * -1) auto;
   margin-inline-end: calc(var(--btn-size) * -0.5);
