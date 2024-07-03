@@ -14,6 +14,9 @@ export default class extends Controller {
   }
 
   #handleTouchEnd(event) {
+    console.log(this.#isSelection)
+    if (this.#isSelection) return
+
     const endX = event.changedTouches[0].clientX
     const endY = event.changedTouches[0].clientY
     const deltaX = Math.abs(endX - this.startX)
@@ -34,5 +37,10 @@ export default class extends Controller {
 
   #swipedRight() {
     this.dispatch("swipe-right")
+  }
+
+  get #isSelection() {
+    const selection = window.getSelection()
+    return selection.toString().length > 0 && !selection.isCollapsed
   }
 }
