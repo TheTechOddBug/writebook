@@ -61,7 +61,7 @@ module BooksHelper
   private
     def hotkey_data_attributes(key, enabled: true)
       if enabled
-        { controller: "hotkey", action: "keydown.#{key}@document->hotkey#click" }
+        { controller: "hotkey", action: "keydown.#{key}@document->hotkey#click touch:swipe-#{key}@window->hotkey#click" }
       end
     end
 end
