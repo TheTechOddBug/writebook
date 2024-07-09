@@ -3,7 +3,7 @@ title: Writing with Writebook
 ---
 # Writing
 
-We've designed Writebook to be an calm, enjoyable and distraction-free place to write.
+We've designed Writebook to be a calm, enjoyable and distraction-free place to write.
 
 Here's what you need to know.
 
