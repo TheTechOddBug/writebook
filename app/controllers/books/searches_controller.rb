@@ -7,6 +7,6 @@ class Books::SearchesController < ApplicationController
 
   private
     def book_pages
-      Page.joins(:leaf).where(leaf: { book: @book })
+      Page.joins(:leaf).where(leaves: { book: @book }).merge(Leaf.positioned)
     end
 end
