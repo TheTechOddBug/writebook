@@ -1,5 +1,9 @@
-<%= turbo_frame_tag :search do %>
-  <%= form_with url: book_search_url(book) do |f| %>
-    <%= f.search_field :search %>
-  <% end %>
-<% end %>
+<div data-controller="dialog">
+  <button data-action="click->dialog#open">Search</button>
+
+  <dialog data-dialog-target="menu" class="search_modal">
+    <%= turbo_frame_tag :search do %>
+      <%= render "books/searches/form", book: book %>
+    <% end %>
+  </dialog>
+</div>

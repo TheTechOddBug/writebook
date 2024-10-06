@@ -1,9 +1,7 @@
 <%= turbo_frame_tag :search do %>
-  <%= form_with url: book_search_url(book) do |f| %>
-    <%= f.search_field :search %>
-  <% end %>
+  <%= render "books/searches/form", book: book %>
 
-  <div class="search__results shadow">
+  <div class="search__results">
     <% if @pages.any? %>
       <% @pages.each do |page| %>
         <%= render "books/searches/result", page: page %>
