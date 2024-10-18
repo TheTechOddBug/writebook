@@ -26,9 +26,7 @@
   </div>
 <% end %>
 
-<% content_for :sidebar do %>
-  <%= render "leaves/sidebar", book: @book %>
-<% end %>
+<%= render "leaves/sidebar", book: @book %>
 
 <div class="page--section <%= "theme--dark" if @section.theme == "dark" %>">
   <%= render "sections/form", book: @book, section: @section %>

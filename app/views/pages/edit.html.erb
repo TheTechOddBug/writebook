@@ -25,9 +25,7 @@
   </div>
 <% end %>
 
-<% content_for :sidebar do %>
-  <%= render "leaves/sidebar", book: @book %>
-<% end %>
+<%= render "leaves/sidebar", book: @book %>
 
 <article class="layout--reading">
   <%= render "leaves/being_edited_indicator", leaf: @leaf %>
