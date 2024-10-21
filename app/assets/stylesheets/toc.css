@@ -25,11 +25,6 @@
     flex-direction: column;
     row-gap: calc(var(--block-space) * 0.3);
   }
-
-  #sidebar & {
-    margin-block: clamp(var(--block-space), 6%, calc(var(--block-space) * 3));
-    margin-inline: clamp(var(--inline-space), 6%, calc(var(--inline-space) * 3));
-  }
 }
 
 .toc__blank-slate {
