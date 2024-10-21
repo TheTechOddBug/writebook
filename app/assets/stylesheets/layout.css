@@ -100,7 +100,6 @@ body {
   grid-area: sidebar;
   inline-size: 25vw;
   max-block-size: 100%;
-  overflow: auto;
   position: relative;
   transition: margin-inline-start 0.2s ease-out;
 
