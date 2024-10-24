@@ -1,4 +1,6 @@
 class Books::SearchesController < ApplicationController
+  allow_unauthenticated_access
+
   include BookScoped
 
   def create

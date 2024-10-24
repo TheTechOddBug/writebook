@@ -14,6 +14,19 @@ class Books::SearchesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a", text: /Thanks for reading/i
   end
 
+  test "create allows searching published books without being logged in" do
+    sign_out
+    books(:handbook).update!(published: true)
+
+    post book_search_url(books(:handbook)), params: { search: "Thanks" }
+    assert_response :success
+
+    books(:handbook).update!(published: false)
+
+    post book_search_url(books(:handbook)), params: { search: "Thanks" }
+    assert_response :not_found
+  end
+
   test "create shows when there are no matches" do
     post book_search_url(books(:handbook)), params: { search: "the invisible man" }
 
