@@ -107,4 +107,11 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     assert_in_body "<div class='test'>"
     assert_not_in_body "&lt;"
   end
+
+  test "show includes link to markdown format" do
+    get book_slug_path(books(:handbook))
+
+    assert_response :success
+    assert_select "link[rel=\"alternate\"][type=\"text/markdown\"][href=\"#{book_slug_path(books(:handbook), format: :md)}\"]"
+  end
 end

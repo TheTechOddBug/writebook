@@ -38,13 +38,22 @@ class LeafablesControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  test "show includes link to markdown format" do
+    get leafable_slug_path(leaves(:welcome_page))
+
+    assert_response :success
+    assert_select "link[rel=\"alternate\"][type=\"text/markdown\"][href=\"#{leafable_slug_path(leaves(:welcome_page), format: :md)}\"]"
+  end
+
   test "show with markdown format returns raw markdown content" do
     leaves(:welcome_page).leafable.update!(body: "## Hello\n\nThis is **bold** text.")
 
     get leafable_slug_path(leaves(:welcome_page), format: :md)
 
     assert_response :success
-    assert_equal "## Hello\n\nThis is **bold** text.", response.body.strip
+    assert_in_body "## Hello"
+    assert_in_body "This is **bold** text."
+    assert_in_body "title: \"Welcome to The Handbook!\""
   end
 
   test "show with markdown format for section returns body" do
@@ -53,7 +62,8 @@ class LeafablesControllerTest < ActionDispatch::IntegrationTest
     get leafable_slug_path(leaves(:welcome_section), format: :md)
 
     assert_response :success
-    assert_equal "Section Body Content", response.body.strip
+    assert_in_body "Section Body Content"
+    assert_in_body "title: \"The Welcome Section\""
   end
 
   test "show with markdown format for picture returns caption" do
@@ -62,7 +72,8 @@ class LeafablesControllerTest < ActionDispatch::IntegrationTest
     get leafable_slug_path(leaves(:reading_picture), format: :md)
 
     assert_response :success
-    assert_equal "A beautiful picture", response.body.strip
+    assert_in_body "A beautiful picture"
+    assert_in_body "title: \"Reading\""
   end
 
   test "show with markdown format does not escape HTML entities" do
