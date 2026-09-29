@@ -11,10 +11,11 @@ class MarkdownRendererTest < ActiveSupport::TestCase
 
   test "it escapes image attributes" do
     markdown = MarkdownRenderer.build
-    content = markdown.render(%(![a "b"](/image.png "x" data-x="y")))
+    content = markdown.render(%(![a "b" &amp; c](/image.png?a=1&b=2 "x" data-x="y")))
 
     assert_includes content, %(title="x&quot; data-x=&quot;y")
-    assert_includes content, %(alt="a &quot;b&quot;")
+    assert_includes content, %(alt="a &quot;b&quot; &amp; c")
+    assert_includes content, %(href="/image.png?a=1&amp;b=2")
     assert_empty Nokogiri::HTML5.fragment(content).css("[data-x]")
   end
 end
